@@ -1,0 +1,6 @@
+node_modules
+dist
+.git
+vendor/nbrain-ui/.build
+.env
+.env.*
