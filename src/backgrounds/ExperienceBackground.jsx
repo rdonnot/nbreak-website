@@ -1,0 +1,6 @@
+import React,{lazy,Suspense,Component,useEffect,useRef,useState} from 'react';
+import {PHYSARUM_PRESETS} from './physarum/presets';
+const Sea=lazy(()=>import('./SeastormBackground').then(m=>({default:m.SeastormBackground})));
+const Physarum=lazy(()=>import('./physarum/PhysarumBackground').then(m=>({default:m.PhysarumBackground})));
+class SafeScene extends Component{state={failed:false};static getDerivedStateFromError(){return{failed:true}}render(){return this.state.failed?null:this.props.children}}
+export function ExperienceBackground({mode,enabled}){const host=useRef(null);const [visible,setVisible]=useState(true);useEffect(()=>{const observer=new IntersectionObserver(([e])=>setVisible(e.isIntersecting),{rootMargin:'120px'});if(host.current)observer.observe(host.current);return()=>observer.disconnect()},[]);return <div ref={host} className="experiment-canvas" aria-hidden="true"><SafeScene key={mode}><Suspense fallback={null}>{enabled&&visible&&(mode==='flow'?<Sea className="shader-scene" params={{textureSize:320,speed:.65,flowSpeed:.008,alpha:.3,trailFade:.028,centerPull:.5,color:[.31,.48,1]}}/>:<Physarum className="shader-scene" preset={PHYSARUM_PRESETS['physarum-network']} look={{textureSize:320,color:[.52,.38,1],brightness:1.3,speed:.8}}/>)}</Suspense></SafeScene></div>}

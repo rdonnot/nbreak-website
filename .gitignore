@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.sites-runtime/
+vendor/nbrain-ui/.build/
+.env
+.env.*
+!.env.example
+.DS_Store

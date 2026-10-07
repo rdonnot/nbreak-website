@@ -1,0 +1,83 @@
+{
+  "name": "@nbrain/ui",
+  "version": "0.3.3",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "demo": "vite --host 0.0.0.0",
+    "build": "npm run build:lib && npm run build:demo",
+    "build:lib": "node scripts/build-styles.mjs && vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json && node scripts/copy-assets.mjs",
+    "build:demo": "tsc --noEmit && vite build && node scripts/standalone.mjs",
+    "typecheck": "tsc --noEmit && tsc -p migration/tsconfig.json",
+    "test": "node scripts/verify-dom.mjs && node scripts/verify-adapter.mjs && node scripts/verify-widgets.mjs && node scripts/verify-radial.mjs",
+    "test:package": "node scripts/verify-package.mjs",
+    "prepack": "npm run build:lib",
+    "preview": "vite preview --outDir dist-demo --host 0.0.0.0",
+    "prepare": "npm run build:lib"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.6.0",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/oxanium": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "lucide-react": "^0.383.0",
+    "tailwind-merge": "^3.6.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^25.9.3",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^6.0.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.4.5",
+    "vite": "^8.0.16",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "motion": "^12.42.0",
+    "jsdom": "^29.0.0",
+    "esbuild": "^0.27.0",
+    "postcss": "^8.5.0"
+  },
+  "description": "n\u2019brain React UI system: smoked glass, agent core energy, modular widgets and production components.",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "FONT-LICENSES",
+    "API.md",
+    "WIDGETS.md",
+    "RADIAL.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./widgets": {
+      "types": "./dist/widgets/index.d.ts",
+      "import": "./dist/widgets.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./fonts.css": "./dist/fonts.css",
+    "./assets/identity.png": "./dist/assets/identity.png",
+    "./package.json": "./package.json"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "motion": "^12.42.0"
+  }
+}
