@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "sections": [
+    {
+      "id": "hero", "type": "hero", "nav": "Home",
+      "kicker": "The agentic platform for AI-hybrid creative production",
+      "title": "From the first word to the final frame.",
+      "lead": "Write it, previsualise it, render it, review it, perform it — in one place, with a crew of agents, on every device.",
+      "cta": { "label": "Talk to us", "href": "https://fr.linkedin.com/in/romain-donnot-7995709" }
+    },
+    {
+      "id": "idea", "type": "cards", "nav": "Idea",
+      "kicker": "The idea",
+      "title": "One platform. Three promises.",
+      "lead": "A production is a dozen tools and a dozen hand-offs. N’Brain puts it behind one surface and gives every stage its own AI director.",
+      "cards": [
+        { "tag": "Control plane", "title": "Agentic", "text": "Agents run each stage from the room you are in — and stop for your approval at every gate.", "tone": "indigo" },
+        { "tag": "Show control", "title": "On every device", "text": "Desktop, tablet, phone. Shared sessions, roles, live cursors. MIDI, OSC, gamepad, camera.", "tone": "amber" },
+        { "tag": "Data plane", "title": "Yours to keep", "text": "Your machines, your GPUs, your versions. Offline on a signed grant, or in the cloud.", "tone": "orange" }
+      ]
+    },
+    {
+      "id": "double", "type": "double", "nav": "Digital double",
+      "kicker": "Key concept",
+      "title": "A real world and its digital double.",
+      "lead": "Every venue, street and set exists twice: measured in the real, rebuilt in the virtual. One dataset, shown as a plan or in 3D — side by side, always in step.",
+      "images": [
+        { "src": "img/review_split.jpg", "label": "Live app · 2D beside 3D, one review", "kind": "virtual" },
+        { "src": "img/sap_previs.jpg", "label": "Virtual · the stadium’s digital double", "kind": "virtual" },
+        { "src": "img/sch_plate.jpg", "label": "Real · same cameras, same LED screens", "kind": "real" },
+        { "src": "img/ferry_map.jpg", "label": "2D · map and route", "kind": "virtual" }
+      ]
+    },
+    {
+      "id": "layers", "type": "layers", "nav": "Architecture",
+      "kicker": "How it fits together",
+      "title": "Three layers, one brain.",
+      "layers": [
+        { "tag": "Layer 01", "title": "Show control", "text": "One generic interface for everyone.", "items": ["Multi-user, role-based", "Edit and Live modes", "Every input device"], "tone": "amber" },
+        { "tag": "Layer 02", "title": "N’Brain", "text": "The agentic core, over one tool surface.", "items": ["Hermes agents and stage directors", "Providers: ComfyUI, Unreal, Octane, Blender", "Fast decisions in ~20 ms"], "tone": "indigo" },
+        { "tag": "Layer 03", "title": "Knowledge & data", "text": "What the crew remembers and what it makes.", "items": ["Knowledge base and wiki graph", "Shots, takes, versions, cuts", "Lore version control"], "tone": "orange" }
+      ],
+      "chips": ["Offline / local", "Cloud", "Data plane: no LLM in the hot path"]
+    },
+    {
+      "id": "apps", "type": "tiles", "nav": "Applications",
+      "kicker": "Applications",
+      "title": "Eight crafts. Open any one.",
+      "lead": "Each is an application on its own, and each hands its work to the next.",
+      "tiles": [
+        { "n": "01", "title": "Write", "text": "Screenplay, story, research, pitch decks." },
+        { "n": "02", "title": "Imagine", "text": "Visual bible, image and video generation." },
+        { "n": "03", "title": "Board", "text": "Storyboards, shot list, takes and versions." },
+        { "n": "04", "title": "Previs", "text": "WebGPU 3D stage, cameras, scans, LED walls." },
+        { "n": "05", "title": "Plates", "text": "360° driving plates from a street address." },
+        { "n": "06", "title": "Edit & review", "text": "Timeline, music, review with clients." },
+        { "n": "07", "title": "Produce", "text": "Stages, gates, schedule, breakdown, Lore." },
+        { "n": "08", "title": "Perform", "text": "Controls, signals, LED processors, cameras." }
+      ]
+    },
+    {
+      "id": "crew", "type": "cards", "nav": "Crew",
+      "kicker": "The crew",
+      "title": "Agents with a job, not a chat box.",
+      "lead": "Each room has a stage director who knows its pipeline and stops at the gate.",
+      "cards": [
+        { "tag": "Specialists", "title": "A crew per craft", "text": "Writing, storyboard, audio, motion, plates — each in its own sandbox.", "tone": "indigo" },
+        { "tag": "Visible work", "title": "Steps, tokens, ETA", "text": "Every run shows what it is doing, what it costs, and when it will finish.", "tone": "indigo" },
+        { "tag": "You decide", "title": "Approve at the gate", "text": "The agent proposes; you approve. Autonomy is a dial, not a default.", "tone": "indigo" }
+      ]
+    },
+    {
+      "id": "cases", "type": "cases", "nav": "Use cases",
+      "kicker": "Use cases",
+      "title": "Four productions, one platform.",
+      "cases": [
+        { "kicker": "01 · 3D review to live shows", "title": "From a 3D review to the live show", "image": "img/review_3d.jpg", "label": "Stage review · video on the LED wall",
+          "steps": ["Double the venue once, in 3D.", "Review it like Frame.io, notes pinned in 3D.", "Run the same scene live."] },
+        { "kicker": "02 · Virtual production", "title": "From a street address to the LED volume", "image": "img/ves_drive.jpg", "label": "The rebuilt street, driver’s view",
+          "steps": ["Measure the real street.", "Agents build its double and render the 360° plate.", "Operate Unreal and the wall on set."] },
+        { "kicker": "03 · Short film", "title": "The Night Ferry", "image": "img/ferry_frame.jpg", "label": "Key frame · the last crossing",
+          "steps": ["A one-line idea becomes a script and a bible.", "Blocked on the 2D plan and in 3D.", "The pitch deck writes itself."] },
+        { "kicker": "04 · Music video", "title": "Sapés comme jamais", "image": "img/sap_blue.jpg", "label": "Visuals designed on the LED stage",
+          "steps": ["Drop the song: beats, sections, lyrics.", "Plan a visual per section on the stage.", "Generate, then cut to the music."] }
+      ]
+    },
+    {
+      "id": "start", "type": "start", "nav": "Get started",
+      "kicker": "Get started",
+      "title": "Start with Home. Add what you need.",
+      "lead": "Access is a catalogue of bundles, and nothing you do not use is started.",
+      "chips": ["Home", "Writing room", "Visual development", "Edit and sound", "Previs and plates", "Production office", "Live show", "Music video studio"],
+      "cta": { "label": "Talk to us", "href": "https://fr.linkedin.com/in/romain-donnot-7995709" }
+    }
+  ]
+}

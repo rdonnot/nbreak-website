@@ -36,6 +36,20 @@ The product button links to contact until you add a new N’Brain product URL.
 Contact currently links to Romain Donnot’s LinkedIn profile.
 Language choice is stored in the visitor’s browser. Reduced-motion preferences disable animation.
 
+## N’Brain brochure (`/brochure/`)
+
+A one-page, editable brochure with the flow shader behind it.
+
+- `public/brochure/content.json`: every word, link and image path. Edit this to change the published page.
+- `public/brochure/img/`: its images and logo files.
+- `src/brochure/`: the page (`main.jsx`) and its style (`brochure.css`).
+- **Edit in the browser:** open `/brochure/?edit`. Click any text to type; use the small tools on hover to move,
+  duplicate or remove cards, items and sections, `＋` to add, and *URL… / Upload…* to replace a picture.
+  Edits autosave in your browser only (visitors never see them).
+- **Publish:** *Export content.json* in the edit bar, replace `public/brochure/content.json` (and add any new files
+  to `public/brochure/img/`), then commit. *Import* loads a file back; *Reset* drops your draft.
+- *Print / PDF* in the edit bar gives one 16:9 page per section.
+
 ## Create your GitHub repository
 
 Create an empty repository, then run these commands inside this extracted folder:
