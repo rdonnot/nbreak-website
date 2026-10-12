@@ -2,95 +2,276 @@
   "version": 1,
   "sections": [
     {
-      "id": "hero", "type": "hero", "nav": "Home",
+      "id": "hero",
+      "type": "hero",
+      "nav": "Home",
       "kicker": "The agentic platform for AI-hybrid creative production",
       "title": "From the first word to the final frame.",
       "lead": "Write it, previsualise it, render it, review it, perform it — in one place, with a crew of agents, on every device.",
-      "cta": { "label": "Talk to us", "href": "https://fr.linkedin.com/in/romain-donnot-7995709" }
+      "cta": {
+        "label": "Talk to us",
+        "href": "https://fr.linkedin.com/in/romain-donnot-7995709"
+      }
     },
     {
-      "id": "idea", "type": "cards", "nav": "Idea",
-      "kicker": "The idea",
-      "title": "One platform. Three promises.",
-      "lead": "A production is a dozen tools and a dozen hand-offs. N’Brain puts it behind one surface and gives every stage its own AI director.",
-      "cards": [
-        { "tag": "Control plane", "title": "Agentic", "text": "Agents run each stage from the room you are in — and stop for your approval at every gate.", "tone": "indigo" },
-        { "tag": "Show control", "title": "On every device", "text": "Desktop, tablet, phone. Shared sessions, roles, live cursors. MIDI, OSC, gamepad, camera.", "tone": "amber" },
-        { "tag": "Data plane", "title": "Yours to keep", "text": "Your machines, your GPUs, your versions. Offline on a signed grant, or in the cloud.", "tone": "orange" }
-      ]
-    },
-    {
-      "id": "double", "type": "double", "nav": "Digital double",
-      "kicker": "Key concept",
-      "title": "A real world and its digital double.",
-      "lead": "Every venue, street and set exists twice: measured in the real, rebuilt in the virtual. One dataset, shown as a plan or in 3D — side by side, always in step.",
-      "images": [
-        { "src": "img/review_split.jpg", "label": "Live app · 2D beside 3D, one review", "kind": "virtual" },
-        { "src": "img/sap_previs.jpg", "label": "Virtual · the stadium’s digital double", "kind": "virtual" },
-        { "src": "img/sch_plate.jpg", "label": "Real · same cameras, same LED screens", "kind": "real" },
-        { "src": "img/ferry_map.jpg", "label": "2D · map and route", "kind": "virtual" }
-      ]
-    },
-    {
-      "id": "layers", "type": "layers", "nav": "Architecture",
-      "kicker": "How it fits together",
-      "title": "Three layers, one brain.",
-      "layers": [
-        { "tag": "Layer 01", "title": "Show control", "text": "One generic interface for everyone.", "items": ["Multi-user, role-based", "Edit and Live modes", "Every input device"], "tone": "amber" },
-        { "tag": "Layer 02", "title": "N’Brain", "text": "The agentic core, over one tool surface.", "items": ["Hermes agents and stage directors", "Providers: ComfyUI, Unreal, Octane, Blender", "Fast decisions in ~20 ms"], "tone": "indigo" },
-        { "tag": "Layer 03", "title": "Knowledge & data", "text": "What the crew remembers and what it makes.", "items": ["Knowledge base and wiki graph", "Shots, takes, versions, cuts", "Lore version control"], "tone": "orange" }
+      "id": "story",
+      "type": "story",
+      "nav": "Problem",
+      "kicker": "The problem",
+      "title": "Every production lives in two worlds that never meet.",
+      "lead": "The real one: a stadium, a street, a ferry deck, a crew with cameras and LED walls. The virtual one: scripts, 3D, renders, AI. Today you hold them together by hand, with a dozen tools and a lot of meetings.",
+      "beats": [
+        {
+          "n": "01",
+          "title": "Lost in translation",
+          "text": "A venue is measured once, then redrawn in every tool. By the time it reaches the stage, nothing quite matches."
+        },
+        {
+          "n": "02",
+          "title": "Waiting on each other",
+          "text": "Previs waits for the plan, the render waits for the previs, the client waits for the render. Every hand-off costs a day."
+        },
+        {
+          "n": "03",
+          "title": "No one holds the whole",
+          "text": "AI tools are brilliant and blind: no memory of the show, no idea what the stage or the camera look like."
+        }
       ],
-      "chips": ["Offline / local", "Cloud", "Data plane: no LLM in the hot path"]
+      "closing": "What if the virtual world were not a copy, but a double: tied to the real one by data?",
+      "body": [
+        "The result is a production where the creative intent is clear but the information is scattered. Nobody is doing it wrong; the tools simply do not share a world."
+      ]
     },
     {
-      "id": "apps", "type": "tiles", "nav": "Applications",
+      "id": "double",
+      "type": "double",
+      "nav": "Digital double",
+      "kicker": "The main concept",
+      "title": "The digital double.",
+      "lead": "A digital double is not a 3D model you export once. It is a living twin, tied to the real thing by data. Measure the real, mirror it in 3D, and from then on both move together.",
+      "images": [
+        {
+          "src": "img/review_split.jpg",
+          "label": "Live app · the 2D view beside the 3D stage",
+          "kind": "virtual"
+        },
+        {
+          "src": "img/sap_previs.jpg",
+          "label": "Virtual · the double of the stadium",
+          "kind": "virtual"
+        },
+        {
+          "src": "img/sch_plate.jpg",
+          "label": "Real · same cameras, same LED screens",
+          "kind": "real"
+        },
+        {
+          "src": "img/ferry_map.jpg",
+          "label": "2D · plan and route",
+          "kind": "virtual"
+        }
+      ],
+      "points": [
+        {
+          "title": "1 · Measure",
+          "text": "Scans, plans, photos, LiDAR, maps: the real world becomes data, once."
+        },
+        {
+          "title": "2 · Mirror",
+          "text": "The same data drives a 2D plan and a 3D stage, side by side, always in step."
+        },
+        {
+          "title": "3 · Move together",
+          "text": "Change the double and the real follows: LED pixel maps, cameras, plates, cues. Change the real and the double updates."
+        }
+      ],
+      "body": [
+        "Today a “model” is a snapshot: someone exports a file, someone else imports it, and from that moment it starts to drift from the real venue. A digital double is different. It is a living twin that stays tied to the real thing by data: dimensions, positions, cameras, screens, even the video playing on them.",
+        "In N’Brain the double is the project’s shared dataset, not a picture of it. The 2D plan, the 3D stage, the pixel map for the LED processor, the camera plates and the cues that run the show are all views of the same data. Edit one and the others change, because there is only one thing underneath.",
+        "That is why it works in both directions. Measure the real world (a scan, LiDAR, a map, a photo) and the double updates. Change the double (move a camera, recolour the wall, swap the clip) and the real world receives the exact numbers to follow: the pixel map, the lens, the cue. Real and virtual stop being two versions of the truth.",
+        "It also gives the AI something to hold on to. An agent that can see the stage, the camera and the shot makes useful decisions, instead of guessing from a text prompt."
+      ]
+    },
+    {
+      "id": "layers",
+      "type": "stack",
+      "nav": "Three layers",
+      "kicker": "Why three layers",
+      "title": "Three layers, because three jobs must never mix.",
+      "lead": "Fast things must never wait for slow things. So N’Brain separates where people and devices meet, where decisions are made, and where the truth is kept.",
+      "layers": [
+        {
+          "tag": "Layer 01",
+          "title": "Show control",
+          "job": "The one surface where people and devices meet.",
+          "without": "Every craft ships its own app, its own login, its own remote.",
+          "proof": "One workspace on desktop, tablet and phone. MIDI, OSC, gamepad, camera. Edit and Live in one tap.",
+          "tone": "amber"
+        },
+        {
+          "tag": "Layer 02",
+          "title": "N’Brain",
+          "job": "Agents that read the show and act on it, through one tool surface.",
+          "without": "AI is a chat box with no memory, no stage and no gate.",
+          "proof": "A stage director per room. Approval at every gate. Typed decisions in about 20 ms.",
+          "tone": "indigo"
+        },
+        {
+          "tag": "Layer 03",
+          "title": "Knowledge & data",
+          "job": "The single source of truth: scripts, shots, takes, versions, the double itself.",
+          "without": "The truth lives in someone’s folder, in three versions.",
+          "proof": "Per-project memory. Lore version control. Every take filed on its shot.",
+          "tone": "orange"
+        }
+      ],
+      "down": "Intent and commands",
+      "up": "State and results",
+      "rule": "The data plane (telemetry, cues, LED) never waits for an AI: no LLM in the hot path, sub-millisecond to two frames. AI explains and suggests; the rails stay deterministic.",
+      "chips": [
+        "Offline / local",
+        "Cloud",
+        "Signed 24 h offline grants"
+      ],
+      "body": [
+        "Each layer does one job and talks to its neighbours only through a narrow, typed surface. People and devices at the top send intent down; agents turn intent into actions; the data layer records what happened and answers what is true. State and results flow back up.",
+        "The separation is what makes it fast and safe. Slow, creative, AI-driven work lives in the control plane: it can take seconds, ask for approval and be wrong. Live work (telemetry, cues, LED, cameras) lives on the data plane and never waits for a model. Neither can break the other.",
+        "It is also what makes it yours. The data sits on your machines and in your versions; the agents can drive local GPUs or cloud engines; the interface is just a browser. Upgrade one layer without rebuilding the others, work offline for 24 hours on a signed grant, or host everything in the cloud."
+      ]
+    },
+    {
+      "id": "cases",
+      "type": "cases",
+      "nav": "Use cases",
+      "kicker": "In practice",
+      "title": "Four productions, one double.",
+      "cases": [
+        {
+          "kicker": "01 · 3D review to live shows",
+          "title": "From a 3D review to the live show",
+          "image": "img/review_3d.jpg",
+          "label": "Stage review · video on the LED wall",
+          "steps": [
+            "Double the stadium once: scan, plan, LED structure.",
+            "Review it in the browser like Frame.io, the clip playing on the LED wall.",
+            "Run the same scene live from the same data."
+          ],
+          "challenge": "A stadium show nobody can rehearse in the stadium.",
+          "payoff": "The client approves what the audience will see."
+        },
+        {
+          "kicker": "02 · Virtual production",
+          "title": "From a street address to the LED volume",
+          "image": "img/ves_drive.jpg",
+          "label": "The rebuilt street, driver’s view",
+          "steps": [
+            "Measure the real street.",
+            "Agents build its double and render the 360° plate.",
+            "Operate Unreal and the wall on set."
+          ],
+          "challenge": "A car scene on a street in France, for an LED volume.",
+          "payoff": "One approval, then the final render."
+        },
+        {
+          "kicker": "03 · Short film",
+          "title": "The Night Ferry",
+          "image": "img/ferry_frame.jpg",
+          "label": "Key frame · the last crossing",
+          "steps": [
+            "A one-line idea becomes a script and a bible.",
+            "Blocked on the 2D plan and in 3D.",
+            "The pitch deck writes itself."
+          ],
+          "challenge": "A three-minute film: a deckhand, a stranger, a ferry.",
+          "payoff": "A pitch deck built from the project’s own data."
+        },
+        {
+          "kicker": "04 · Music video",
+          "title": "Sapés comme jamais",
+          "image": "img/sap_blue.jpg",
+          "label": "Visuals designed on the LED stage",
+          "steps": [
+            "Drop the song: beats, sections, lyrics.",
+            "Plan a visual per section on the stage.",
+            "Generate, then cut to the music."
+          ],
+          "challenge": "A song and a stadium-sized idea.",
+          "payoff": "Every section planned on the stage before a clip is generated."
+        }
+      ],
+      "lead": "The same idea each time: measure the real, build its double, move both together."
+    },
+    {
+      "id": "apps",
+      "type": "tiles",
+      "nav": "Applications",
       "kicker": "Applications",
-      "title": "Eight crafts. Open any one.",
+      "title": "What’s inside: eight crafts on the same double.",
       "lead": "Each is an application on its own, and each hands its work to the next.",
       "tiles": [
-        { "n": "01", "title": "Write", "text": "Screenplay, story, research, pitch decks." },
-        { "n": "02", "title": "Imagine", "text": "Visual bible, image and video generation." },
-        { "n": "03", "title": "Board", "text": "Storyboards, shot list, takes and versions." },
-        { "n": "04", "title": "Previs", "text": "WebGPU 3D stage, cameras, scans, LED walls." },
-        { "n": "05", "title": "Plates", "text": "360° driving plates from a street address." },
-        { "n": "06", "title": "Edit & review", "text": "Timeline, music, review with clients." },
-        { "n": "07", "title": "Produce", "text": "Stages, gates, schedule, breakdown, Lore." },
-        { "n": "08", "title": "Perform", "text": "Controls, signals, LED processors, cameras." }
+        {
+          "n": "01",
+          "title": "Write",
+          "text": "Screenplay, story, research, pitch decks."
+        },
+        {
+          "n": "02",
+          "title": "Imagine",
+          "text": "Visual bible, image and video generation."
+        },
+        {
+          "n": "03",
+          "title": "Board",
+          "text": "Storyboards, shot list, takes and versions."
+        },
+        {
+          "n": "04",
+          "title": "Previs",
+          "text": "WebGPU 3D stage, cameras, scans, LED walls."
+        },
+        {
+          "n": "05",
+          "title": "Plates",
+          "text": "360° driving plates from a street address."
+        },
+        {
+          "n": "06",
+          "title": "Edit & review",
+          "text": "Timeline, music, review with clients."
+        },
+        {
+          "n": "07",
+          "title": "Produce",
+          "text": "Stages, gates, schedule, breakdown, Lore."
+        },
+        {
+          "n": "08",
+          "title": "Perform",
+          "text": "Controls, signals, LED processors, cameras."
+        }
       ]
     },
     {
-      "id": "crew", "type": "cards", "nav": "Crew",
-      "kicker": "The crew",
-      "title": "Agents with a job, not a chat box.",
-      "lead": "Each room has a stage director who knows its pipeline and stops at the gate.",
-      "cards": [
-        { "tag": "Specialists", "title": "A crew per craft", "text": "Writing, storyboard, audio, motion, plates — each in its own sandbox.", "tone": "indigo" },
-        { "tag": "Visible work", "title": "Steps, tokens, ETA", "text": "Every run shows what it is doing, what it costs, and when it will finish.", "tone": "indigo" },
-        { "tag": "You decide", "title": "Approve at the gate", "text": "The agent proposes; you approve. Autonomy is a dial, not a default.", "tone": "indigo" }
-      ]
-    },
-    {
-      "id": "cases", "type": "cases", "nav": "Use cases",
-      "kicker": "Use cases",
-      "title": "Four productions, one platform.",
-      "cases": [
-        { "kicker": "01 · 3D review to live shows", "title": "From a 3D review to the live show", "image": "img/review_3d.jpg", "label": "Stage review · video on the LED wall",
-          "steps": ["Double the venue once, in 3D.", "Review it like Frame.io, notes pinned in 3D.", "Run the same scene live."] },
-        { "kicker": "02 · Virtual production", "title": "From a street address to the LED volume", "image": "img/ves_drive.jpg", "label": "The rebuilt street, driver’s view",
-          "steps": ["Measure the real street.", "Agents build its double and render the 360° plate.", "Operate Unreal and the wall on set."] },
-        { "kicker": "03 · Short film", "title": "The Night Ferry", "image": "img/ferry_frame.jpg", "label": "Key frame · the last crossing",
-          "steps": ["A one-line idea becomes a script and a bible.", "Blocked on the 2D plan and in 3D.", "The pitch deck writes itself."] },
-        { "kicker": "04 · Music video", "title": "Sapés comme jamais", "image": "img/sap_blue.jpg", "label": "Visuals designed on the LED stage",
-          "steps": ["Drop the song: beats, sections, lyrics.", "Plan a visual per section on the stage.", "Generate, then cut to the music."] }
-      ]
-    },
-    {
-      "id": "start", "type": "start", "nav": "Get started",
+      "id": "start",
+      "type": "start",
+      "nav": "Get started",
       "kicker": "Get started",
       "title": "Start with Home. Add what you need.",
       "lead": "Access is a catalogue of bundles, and nothing you do not use is started.",
-      "chips": ["Home", "Writing room", "Visual development", "Edit and sound", "Previs and plates", "Production office", "Live show", "Music video studio"],
-      "cta": { "label": "Talk to us", "href": "https://fr.linkedin.com/in/romain-donnot-7995709" }
+      "chips": [
+        "Home",
+        "Writing room",
+        "Visual development",
+        "Edit and sound",
+        "Previs and plates",
+        "Production office",
+        "Live show",
+        "Music video studio"
+      ],
+      "cta": {
+        "label": "Talk to us",
+        "href": "https://fr.linkedin.com/in/romain-donnot-7995709"
+      }
     }
   ]
 }

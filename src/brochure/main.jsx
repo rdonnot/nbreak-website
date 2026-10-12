@@ -117,6 +117,20 @@ const Cta = ({ path }) => {
   );
 };
 
+const Body = ({ i }) => {
+  const { content } = useEd();
+  const p = ['sections', i, 'body'];
+  const paras = getIn(content, p) || [];
+  return (
+    <div className="body">
+      {paras.map((_, k) => (
+        <div key={k} className="para"><F path={[...p, k]} as="p" multiline /><Tools arrayPath={p} index={k} label="paragraph" template /></div>
+      ))}
+      <AddButton arrayPath={p} label="paragraph" template="New paragraph." />
+    </div>
+  );
+};
+
 const Head = ({ i, lead = true }) => (
   <header className="head">
     <F path={['sections', i, 'kicker']} as="div" className="kicker" />
@@ -163,11 +177,80 @@ function Cards({ i, s }) {
   );
 }
 
-function Double({ i, s }) {
-  const p = ['sections', i, 'images'];
+function Story({ i, s }) {
+  const p = ['sections', i, 'beats'];
   return (
     <>
       <Head i={i} />
+      <div className="grid g3 beats">
+        {s.beats.map((b, j) => (
+          <article key={j} className="card beat tone-rose">
+            <Tools arrayPath={p} index={j} label="beat" />
+            <F path={[...p, j, 'n']} as="div" className="bignum" />
+            <F path={[...p, j, 'title']} as="h3" />
+            <F path={[...p, j, 'text']} as="p" multiline />
+          </article>
+        ))}
+      </div>
+      <AddButton arrayPath={p} label="beat" template={{ n: '04', title: 'Title', text: 'Text' }} />
+      <Body i={i} />
+      <F path={['sections', i, 'closing']} as="p" className="closing" multiline />
+    </>
+  );
+}
+
+function Stack({ i, s }) {
+  const p = ['sections', i, 'layers'];
+  return (
+    <>
+      <Head i={i} />
+      <div className="stack">
+        {s.layers.map((l, j) => (
+          <React.Fragment key={j}>
+            {j > 0 && (
+              <div className="link" aria-hidden="true">
+                <span>↓ <F path={['sections', i, 'down']} /></span><span>↑ <F path={['sections', i, 'up']} /></span>
+              </div>
+            )}
+            <article className={`card srow ${tone(l.tone)}`}>
+              <Tools arrayPath={p} index={j} label="layer" />
+              <div className="who">
+                <F path={[...p, j, 'tag']} as="div" className="tag" />
+                <F path={[...p, j, 'title']} as="h3" />
+                <F path={[...p, j, 'job']} as="p" multiline />
+              </div>
+              <div className="why"><b>Without it</b><F path={[...p, j, 'without']} as="p" multiline /></div>
+              <div className="why"><b>In N’Brain</b><F path={[...p, j, 'proof']} as="p" multiline /></div>
+            </article>
+          </React.Fragment>
+        ))}
+      </div>
+      <Body i={i} />
+      <F path={['sections', i, 'rule']} as="p" className="rule" multiline />
+      <Chips path={['sections', i, 'chips']} chips={s.chips} />
+      <AddButton arrayPath={p} label="layer" template={{ tag: 'Layer', title: 'Title', job: 'Job', without: 'Without it', proof: 'In N’Brain', tone: 'blue' }} />
+    </>
+  );
+}
+
+function Double({ i, s }) {
+  const p = ['sections', i, 'images'];
+  const pp = ['sections', i, 'points'];
+  return (
+    <>
+      <Head i={i} />
+      <Body i={i} />
+      {s.points && (
+        <div className="grid g3 points">
+          {s.points.map((x, j) => (
+            <div key={j} className="point">
+              <Tools arrayPath={pp} index={j} label="point" />
+              <F path={[...pp, j, 'title']} as="h3" />
+              <F path={[...pp, j, 'text']} as="p" multiline />
+            </div>
+          ))}
+        </div>
+      )}
       <div className="double">
         {s.images.map((im, j) => (
           <div key={j} className={`cell c${j}`}>
@@ -254,7 +337,7 @@ function Cases({ i, s }) {
   const p = ['sections', i, 'cases'];
   return (
     <>
-      <Head i={i} lead={false} />
+      <Head i={i} />
       <div className="grid g2 cases">
         {s.cases.map((c, j) => (
           <article key={j} className="case card tone-blue">
@@ -263,7 +346,9 @@ function Cases({ i, s }) {
             <div className="casebody">
               <F path={[...p, j, 'kicker']} as="div" className="tag" />
               <F path={[...p, j, 'title']} as="h3" />
+              <F path={[...p, j, 'challenge']} as="p" className="challenge" multiline />
               <Items path={[...p, j, 'steps']} items={c.steps} />
+              <F path={[...p, j, 'payoff']} as="p" className="payoff" multiline />
             </div>
           </article>
         ))}
@@ -283,7 +368,7 @@ function Start({ i, s }) {
   );
 }
 
-const BODIES = { hero: Hero, cards: Cards, double: Double, layers: Layers, tiles: Tiles, cases: Cases, start: Start };
+const BODIES = { story: Story, stack: Stack, hero: Hero, cards: Cards, double: Double, layers: Layers, tiles: Tiles, cases: Cases, start: Start };
 
 /* ─── Page ───────────────────────────────────────────────────────────────────── */
 
