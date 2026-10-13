@@ -22,7 +22,7 @@
         { "label": "Explore the architecture", "href": "#architecture", "variant": "outline" }
       ],
       "micro": "For film, previs, virtual production and live shows · across locations and devices",
-      "figure": { "src": "img/concept/01-same-workspace.webp", "alt": "Concept illustration: one familiar creative workspace, with the tools, APIs and models behind it changing over time.", "caption": "" }
+      "figure": { "src": "img/concept/01-same-workspace.webp", "alt": "Two identical creative workspace windows side by side, each backed by a different set of interchangeable modules, showing that the tools behind can change while the workspace stays the same.", "caption": "" }
     },
     {
       "id": "problem",
@@ -91,7 +91,7 @@
       "kicker": "How the promise works / three layers",
       "title": "The front end stays familiar.\nN’Brain makes the rest flexible.",
       "lead": "The UI gives creatives a consistent way to work with the digital double, assets and devices. N’Brain translates intent into actions across connected tools and compute. The data layer preserves project truth as those connections change.",
-      "figure": { "src": "img/concept/02-architecture.webp", "alt": "Three-layer system map: creative control and Show Control above; N’Brain central orchestration with inputs, tools, APIs and compute; knowledge and production data below.", "caption": "System map · all routes are coordinated from the N’Brain core." },
+      "figure": { "src": "img/concept/02-architecture.webp", "alt": "A three-layer diagram with interface widgets on top, a central N'Brain hub connected to camera, brush, clapperboard, cube and speaker tools in the middle, and project data at the bottom, with arrows flowing both ways.", "caption": "System map · all routes are coordinated from the N’Brain core." },
       "layers": [
         { "n": "01 / UI · THE EXPERIENCE", "title": "Show Control + widgets", "text": "One workspace across desktop, tablet and phone. Modular widgets can form a simple review screen or a technical dashboard. Edit and Live modes accept voice, mocap, MIDI, OSC, gamepad and HTTP input." },
         { "n": "02 / N’BRAIN · THE ADAPTER", "title": "Agents and orchestration", "text": "Agents read the show, coordinate tools and APIs, and propose or execute work through typed decisions and approval gates." },
@@ -111,7 +111,7 @@
       "kicker": "Hybrid production workflow",
       "title": "Traditional craft, AI and virtual production in one thread.",
       "lead": "“Hybrid” describes the work itself. A real location, AI-assisted assets and a virtual production stage contribute to the same shot. The crew does not have to reconstruct the brief, camera plan, versions and approvals at each handoff.",
-      "figure": { "src": "img/concept/12-hybrid-thread.webp", "alt": "A car scene combines traditional location survey and camera work, AI-assisted environment and plate creation, and previs on an LED stage, converging on one shot and digital double.", "caption": "A car scene is one example. Film, VAD, previs and live shows can connect different crafts around the same project data." },
+      "figure": { "src": "img/concept/12-hybrid-thread.webp", "alt": "One lighthouse shot followed through capture, AI exploration, 3D previs, an LED volume and final review, with a check mark between each stage.", "caption": "A car scene is one example. Film, VAD, previs and live shows can connect different crafts around the same project data." },
       "points": [
         { "title": "Traditional stays essential", "text": "Locations, performers, lenses, camera movement and physical takes ground the project." },
         { "title": "AI has production context", "text": "Agents and generation work from the scene, shot, assets and constraints instead of a detached prompt." },
@@ -131,7 +131,7 @@
         { "title": "Act through N’Brain", "text": "An approved instruction reaches an agent, application or device." },
         { "title": "Keep the thread", "text": "Feedback, approvals and results return to the shared project." }
       ],
-      "figure": { "src": "img/concept/04-collaboration.webp", "alt": "Director on set, remote producer and live technician share one N’Brain project, with roles, decisions and versions.", "caption": "One project across locations and devices." }
+      "figure": { "src": "img/concept/04-collaboration.webp", "alt": "A laptop, a tablet and a phone in three places show the same shot and version tag with different controls, linked by one travelling comment.", "caption": "One project across locations and devices." }
     },
     {
       "id": "showcontrol",
@@ -146,7 +146,7 @@
         "The director can work hands-free, the operator can use tactile controls, and software can send requests. N’Brain relates each input to the current project, role and authorised action."
       ],
       "note": "Input mappings and available modes depend on the production configuration. The deterministic live path does not wait for an AI model.",
-      "figure": { "src": "img/concept/03-inputs-one-cue.webp", "alt": "Voice chat, camera gesture, mocap, gamepad, Stream Deck, MIDI, OSC and HTTP requests converge on one Show Control surface and authorised project actions.", "caption": "Eight input paths · one familiar, role-aware control surface." }
+      "figure": { "src": "img/concept/03-inputs-one-cue.webp", "alt": "Five input devices - webcam gesture, microphone, gamepad, button pad and fader - all trigger the same highlighted cue, which switches on one stage light.", "caption": "Eight input paths · one familiar, role-aware control surface." }
     },
     {
       "id": "review",
@@ -156,7 +156,7 @@
       "title": "Simple enough for a client.\nDeep enough for the show team.",
       "lead": "A non-technical stakeholder can open a version in the browser, review the image or sequence, leave feedback and approve it in a Frame.io-style flow. A director or producer can follow shots, decisions and versions. The technical crew can inspect the 2D/3D stage, devices, cues and live state from the same project.",
       "shot": { "src": "img/app-plan-stage.jpg", "alt": "N’Brain live app showing a 2D plan beside a 3D stage", "caption": "Live app · 2D plan beside the 3D stage" },
-      "figure": { "src": "img/concept/05-review-supervision.webp", "alt": "Concept illustration: a client approves a version, a director and producer follow the shots, and the technical crew supervises the stage, all in one project.", "caption": "" },
+      "figure": { "src": "img/concept/05-review-supervision.webp", "alt": "The same dancer frame shown to a client with only play, comment and approve, and to a supervisor with status, versions and charts, both fed from one source frame.", "caption": "" },
       "modes": [
         { "role": "CLIENT / SIMPLE REVIEW", "title": "Watch, comment, approve", "text": "Share a visual version with a clear decision path. The client does not need to operate the technical pipeline." },
         { "role": "DIRECTOR + PRODUCER", "title": "See the production thread", "text": "Compare shots and versions, follow feedback and approvals, and understand what is ready for the next stage." },
@@ -175,7 +175,7 @@
         { "title": "Production pack", "text": "Shot and asset status, breakdown, decisions, versions and next actions for the crew." },
         { "title": "Technical handoff", "text": "Plans, stage views, camera and LED information, device state and cue context for operators." }
       ],
-      "figure": { "src": "img/concept/06-pdf-reports.webp", "alt": "Concept illustration: three visual PDF reports — a creative review, a production pack and a technical handoff.", "caption": "" },
+      "figure": { "src": "img/concept/06-pdf-reports.webp", "alt": "A shot, its annotations and a status card compose into two report pages with the same facts: an airy client page and a dense technical page.", "caption": "" },
       "caption": "Report layouts above illustrate the communication range; the export can be tailored to the production and recipient."
     },
     {
@@ -185,7 +185,7 @@
       "kicker": "Modular interface / role-specific widgets",
       "title": "Your workflow can have its own UI.",
       "lead": "The front end is assembled from widgets that read the same project context. A team can build a workspace for its craft, or ask N’Brain to compose a useful layout for a role and task—then adjust it. The underlying assets, metadata and permissions remain consistent.",
-      "figure": { "src": "img/concept/07-widgets.webp", "alt": "Concept illustration: choosing the useful views and composing them into a workspace for a role.", "caption": "" },
+      "figure": { "src": "img/concept/07-widgets.webp", "alt": "Widget tiles move from a shelf into a personal workspace, while a second suggested layout reuses the same tiles, linked to their twins.", "caption": "" },
       "shelf": {
         "kicker": "Widget library",
         "title": "Choose the useful views",
@@ -271,8 +271,8 @@
       "lead": "For a large show, the network may be unreliable and production data may need to remain private. N’Brain can run supported AI and distribute rendering on local machines without internet. When connected and authorised, the same project can also use online models, APIs and cloud render capacity—or mix local and cloud resources task by task.",
       "caption": "Two deployment paths, with a hybrid choice within the same project.",
       "paths": [
-        { "tag": "PATH A / LOCAL + OFFLINE", "title": "Operate on site.", "text": "Supported AI and render jobs use production-owned hardware. Sensitive data and show control can stay on site, including when internet is unavailable. Offline operation follows the configured signed grant.", "figure": { "src": "img/concept/08-local-offline.webp", "alt": "Concept illustration: AI and render jobs running on production-owned hardware on site, with no internet connection.", "caption": "" } },
-        { "tag": "PATH B / ONLINE + CLOUD", "title": "Add connected capacity.", "text": "Use authorised cloud models, APIs and render nodes when a connection is available. A hybrid production can choose local or cloud resources per task while keeping one workspace and project record.", "figure": { "src": "img/concept/09-render-routes.webp", "alt": "Concept illustration: render routes from one project to local workstations and authorised cloud capacity, chosen per task.", "caption": "" } }
+        { "tag": "PATH A / LOCAL + OFFLINE", "title": "Operate on site.", "text": "Supported AI and render jobs use production-owned hardware. Sensitive data and show control can stay on site, including when internet is unavailable. Offline operation follows the configured signed grant.", "figure": { "src": "img/concept/08-local-offline.webp", "alt": "A monitor and a compact local computer process a shot inside a dashed boundary labelled Local, with the network cable left disconnected outside.", "caption": "" } },
+        { "tag": "PATH B / ONLINE + CLOUD", "title": "Add connected capacity.", "text": "Use authorised cloud models, APIs and render nodes when a connection is available. A hybrid production can choose local or cloud resources per task while keeping one workspace and project record.", "figure": { "src": "img/concept/09-render-routes.webp", "alt": "One render job can go to nearby workstations (Local), to a remote data center (Cloud), or be split between both (Mix).", "caption": "" } }
       ],
       "mini": "Cloud compute and third-party APIs have separate usage costs. Customer-owned local hardware remains the customer’s capacity."
     },
@@ -290,7 +290,7 @@
           "title": "Use compute deliberately.",
           "main": "Cloud AI and rendering draw on data-centre compute, cooling and network infrastructure. For suitable workloads, efficient local inference can avoid remote processing and repeated transfers while using hardware already on site.",
           "items": ["Route supported tasks locally when that fits the job.", "Use cloud capacity when its scale or capabilities are needed.", "Compare actual energy and hardware use before making savings claims."],
-          "figure": { "src": "img/concept/11-energy.webp", "alt": "Concept illustration: routing suitable compute locally to use energy and hardware deliberately.", "caption": "" }
+          "figure": { "src": "img/concept/11-energy.webp", "alt": "A short path from a workstation to a local compute box compared with a long path through a street cabinet, antenna, power lines and a data center.", "caption": "" }
         },
         {
           "sigil": "⌂",
@@ -298,7 +298,7 @@
           "title": "Keep confidential work under your control.",
           "main": "In local/offline mode, unreleased scripts, product designs, brand plans, talent likenesses and project metadata can remain on infrastructure controlled by the production.",
           "items": ["Supported local models can run without sending content to a third-party AI server.", "Choose which assets, if any, are allowed through connected APIs or cloud render paths.", "Keep visibility over data routing and external service terms."],
-          "figure": { "src": "img/concept/10-sovereignty.webp", "alt": "Concept illustration: confidential production material kept on infrastructure the production controls.", "caption": "" }
+          "figure": { "src": "img/concept/10-sovereignty.webp", "alt": "A script, a performer likeness and a design palette are processed inside the production's own boundary, with an optional outside route behind a deliberate switch.", "caption": "" }
         }
       ],
       "foot": "Local hardware still consumes electricity and has an equipment footprint. Privacy and legal duties still apply; connected-service configuration determines which data leaves the facility.",
@@ -315,7 +315,7 @@
       "kicker": "Versioning / archive / efficient context",
       "title": "Keep every decision in reach.\nReplay the story of a show.",
       "lead": "N’Brain can record the production as it happens: scripts, assets, takes, approvals, cues, device events and results. Versions remain traceable through the project. A recorded show process can be revisited or replayed from its states and actions, while earlier configurations remain available to restore.",
-      "figure": { "src": "img/concept/13-versions-replay.webp", "alt": "Production records and versions form an archive. A recorded show sequence can be replayed or restored; a separate consolidation path selects only relevant facts and asset references for an agent or tool.", "caption": "Full production history and focused task context serve different purposes." },
+      "figure": { "src": "img/concept/13-versions-replay.webp", "alt": "A project timeline of versioned script, shot, cue, comment and report stacks, with an arrow back to an earlier state and a folder that picks three records without removing them.", "caption": "Full production history and focused task context serve different purposes." },
       "answer": "A chat holds a conversation. N’Brain keeps the production record.",
       "benefits": [
         { "title": "Archive the whole process", "text": "Follow what changed, who approved it, which asset or take was used, and which cues or devices were involved. Replay a recorded show sequence for review and preparation." },
@@ -356,7 +356,7 @@
       "kicker": "Enterprise services",
       "title": "Integration is part of the offer.",
       "body": ["Workflow assessment, custom connectors, deployment, training and ongoing support can be scoped as a personalised engagement. Integration and service fees are quoted separately from the subscription."],
-      "figure": { "src": "img/concept/14-enterprise-integration.webp", "alt": "Concept illustration: discover and map the workflow, integrate and configure connectors, then hand over and support the team.", "caption": "" }
+      "figure": { "src": "img/concept/14-enterprise-integration.webp", "alt": "Three integration steps: mapping the client's existing tools, fitting a connector to N'Brain, and a handoff with training and support.", "caption": "" }
     },
     {
       "id": "contact",
