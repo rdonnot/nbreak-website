@@ -42,7 +42,14 @@ A one-page, editable brochure with the flow shader behind it.
 
 - `public/brochure/content.json`: every word, link and image path. Edit this to change the published page.
 - `public/brochure/img/`: its images and logo files.
-- `src/brochure/`: the page (`main.jsx`) and its style (`brochure.css`).
+- `src/brochure/`: the page (`main.jsx`) and its style (`brochure.css`). Built from the vendored N’Brain UI
+  (`NBrainProvider`, `Card`, `Badge`, `Button`, `ToggleGroup`, `Separator`, `AgentCore`, the `--nb-*` tokens and fonts);
+  the library CSS is imported as a cascade layer so the page rules win without `!important`.
+- Section types in `content.json`: `hero`, `points`, `idea`, `double`, `layers`, `split` (text beside one picture, with
+  optional `body`, `flow`, `points`, `items`, `note`, `caption`, `reverse`, `band`, `compact`), `review`, `widgets`,
+  `cases`, `crafts`, `paths`, `values`, `memory`, `bundles`, `plans`, `closing`. A title written `"Line one\nLine two"`
+  draws the second line in the accent colour. Every picture is `{src, alt, caption}`.
+- `public/brochure/img/concept/`: the concept visuals (generated separately, 1200×800).
 - **Edit in the browser:** open `/brochure/?edit`. Click any text to type; use the small tools on hover to move,
   duplicate or remove cards, items and sections, `＋` to add, and *URL… / Upload…* to replace a picture.
   Edits autosave in your browser only (visitors never see them).
