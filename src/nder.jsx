@@ -4,16 +4,15 @@
 // Every claim here is something the renderer does today (checked against nder_renderer); keep it that way.
 import React from 'react';
 import {createRoot} from 'react-dom/client';
-import {Mail} from 'lucide-react';
 import {NBrainProvider} from '../vendor/nbrain-ui/src/components/system/provider';
 import {Accordion,Badge,Card} from '../vendor/nbrain-ui/src/components/ui/primitives';
 import {LinkButton,Masthead,Footer,Section,Steps,useLanguage,useReducedMotion,usePageMeta,useHeroDrift} from './site';
-import {COMPANY,NDER} from './release';
+import {NDER} from './release';
+import {ContactForm} from './contact';
 import '@fontsource-variable/inter';import '@fontsource-variable/oxanium';import '@fontsource/ibm-plex-mono/400.css';
 import '../vendor/nbrain-ui/styles.css';import '../site.css';
 
 const open=NDER.stage==='beta'||NDER.stage==='paid';
-const mailto=subject=>`mailto:${COMPANY.email}?subject=${encodeURIComponent(subject)}`;
 
 function StatusBadge({status,t}){
   return status==='ready'
@@ -23,7 +22,7 @@ function StatusBadge({status,t}){
 
 function MainAction({t}){
   if(open)return <LinkButton href={NDER.signupUrl} variant="primary">{NDER.stage==='beta'?t('Rejoindre la bêta gratuite','Join the free beta'):t('Créer un compte','Create an account')}</LinkButton>;
-  return <LinkButton href={mailto('N’Der')} variant="primary">{t('Demander un accès anticipé','Ask for early access')}</LinkButton>;
+  return <LinkButton href="#contact" variant="primary">{t('Demander un accès anticipé','Ask for early access')}</LinkButton>;
 }
 
 function Features({items}){
@@ -137,10 +136,10 @@ function Faq({t}){
   </Section>;
 }
 
-function Contact({t}){
+function Contact({t,language}){
   return <Section id="contact" className="nder-contact" eyebrow={t('CONTACT','CONTACT')} title={t('Une question, un plateau, un projet ?','A question, a stage, a project?')}
     intro={t('Studios, plateaux LED, partenaires : écrivez-nous, nous répondons nous-mêmes.','Studios, LED stages, partners: write to us, we answer ourselves.')}>
-    <div className="nder-actions"><LinkButton href={mailto('N’Der')} variant="silver"><Mail size={16} aria-hidden="true"/>{COMPANY.email}</LinkButton></div>
+    <ContactForm t={t} language={language} topic={NDER.stage==='soon'?'early_access':'question'}/>
   </Section>;
 }
 
@@ -173,7 +172,7 @@ function App(){
       <Beta t={t}/>
       <Requirements t={t}/>
       <Faq t={t}/>
-      <Contact t={t}/>
+      <Contact t={t} language={language}/>
     </main>
     <Footer t={t}/>
   </NBrainProvider>;

@@ -7,7 +7,8 @@ import {createRoot} from 'react-dom/client';
 import {NBrainProvider} from '../vendor/nbrain-ui/src/components/system/provider';
 import {Alert,Button,Card,Checkbox,Field,Input} from '../vendor/nbrain-ui/src/components/ui/primitives';
 import {LinkButton,SimplePage,useLanguage,useReducedMotion,usePageMeta} from './site';
-import {COMPANY,NDER} from './release';
+import {NDER} from './release';
+import {ContactForm} from './contact';
 import '@fontsource-variable/inter';import '@fontsource-variable/oxanium';import '@fontsource/ibm-plex-mono/400.css';
 import '../vendor/nbrain-ui/styles.css';import '../site.css';
 
@@ -63,7 +64,7 @@ function App(){
         <SignupForm t={t} language={language}/>
       </>:<>
         <p className="lede">{t('La bêta n’est pas encore ouverte. Écrivez-nous pour un accès anticipé.','The beta is not open yet. Get in touch for early access.')}</p>
-        <div className="nder-actions"><LinkButton href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('N’Der')}`} variant="primary">{t('Demander un accès anticipé','Ask for early access')}</LinkButton></div>
+        <ContactForm t={t} language={language} topic="early_access"/>
       </>}
     </SimplePage>
   </NBrainProvider>;

@@ -93,3 +93,11 @@
 .footer-links a:hover{color:var(--blue)}
 .masthead nav a[aria-current=page]{color:var(--blue)}
 @media(max-width:600px){.simple-page{padding:130px 6% 80px}.simple-page .lede{font-size:17px}}
+
+/* ─── Contact form ─────────────────────────────────────────────────────── */
+.form-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.field-label{font-size:13px;font-weight:500}
+.hp-field{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.contact-card{max-width:720px}
+.contact-form-wrap{max-width:720px;margin:0 auto;text-align:left}
+@media(max-width:600px){.form-row{grid-template-columns:minmax(0,1fr)}}

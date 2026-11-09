@@ -17,7 +17,7 @@
 // scripts/check-release.mjs fails the build when an open stage lacks any of these or COMPANY below.
 
 export const NDER = {
-  stage: 'soon',
+  stage: 'beta',
   signupUrl: '/n-der/beta/',
   apiUrl: 'https://licence.n-break.com',
   betaUntil: '', // 'YYYY-MM-DD'

@@ -3,8 +3,9 @@ import {createRoot} from 'react-dom/client';
 import {NBrainProvider} from '../vendor/nbrain-ui/src/components/system/provider';
 import {Button,Card,Badge} from '../vendor/nbrain-ui/src/components/ui/primitives';
 import {ExperienceBackground} from './backgrounds/ExperienceBackground';
-import {PROFILE,LinkButton,Masthead,Footer,useLanguage,useReducedMotion,usePageMeta,useHeroDrift} from './site';
+import {LinkButton,Masthead,Footer,useLanguage,useReducedMotion,usePageMeta,useHeroDrift} from './site';
 import {NDER} from './release';
+import {ContactForm} from './contact';
 import '@fontsource-variable/inter';import '@fontsource-variable/oxanium';import '@fontsource/ibm-plex-mono/400.css';
 import '../vendor/nbrain-ui/styles.css';import '../site.css';
 
@@ -62,7 +63,7 @@ function App(){
       <section className="contact-section" id="contact">
         <span className="eyebrow">{t('PARLONS DE VOTRE PROJET','LET’S TALK ABOUT YOUR PROJECT')}</span>
         <h2>{t('Une idée à concrétiser ?','An idea to bring to life?')}</h2>
-        <LinkButton href={PROFILE} external>{t('Contacter Romain sur LinkedIn','Contact Romain on LinkedIn')}</LinkButton>
+        <div className="contact-form-wrap"><ContactForm t={t} language={language} topic="other"/></div>
       </section>
     </main>
     <Footer t={t} home/>
