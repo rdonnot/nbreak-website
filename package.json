@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "node scripts/library-styles.mjs && vite build",
+    "build": "node scripts/check-release.mjs && node scripts/library-styles.mjs && vite build",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
