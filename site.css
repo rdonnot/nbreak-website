@@ -82,3 +82,4 @@
 .footer-links a:hover{color:var(--blue)}
 @media(max-width:600px){.simple-page{padding:130px 6% 80px}.simple-page .lede{font-size:17px}}
 .setup-first{margin-top:10px}
+.nder-vp .feature{border-top-color:#92a9ff70}

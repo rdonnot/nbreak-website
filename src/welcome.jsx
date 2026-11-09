@@ -1,4 +1,4 @@
-// ─── /nder/welcome/ — the link from the signup mail lands here ───────────────
+// ─── /n-der/welcome/ — the link from the signup mail lands here ───────────────
 // The token is in the URL FRAGMENT (#t=…), so it never reaches a server log. Nothing is sent until the
 // person clicks (mail scanners that pre-open links must not consume the one-time token):
 //   POST {apiUrl}/v1/signup/confirm {token} → {licence_key, licence_id, features, kind, seats, expires_at, email, replaced?}
@@ -109,7 +109,7 @@ function Confirm({t,language}){
     }
   }
   if(state.kind==='done')return <Setup licence={state.licence} t={t} language={language}/>;
-  if(!token)return <><p className="lede">{t('Ouvrez cette page depuis le lien reçu par e-mail.','Open this page from the link in your email.')}</p><p><a className="text-link" href="/nder/beta/">{t('Recevoir un lien','Get a link')}</a></p></>;
+  if(!token)return <><p className="lede">{t('Ouvrez cette page depuis le lien reçu par e-mail.','Open this page from the link in your email.')}</p><p><a className="text-link" href="/n-der/beta/">{t('Recevoir un lien','Get a link')}</a></p></>;
   return <Card glass className="product-card form-card">
     <h3>{t('Votre clé est prête.','Your key is ready.')}</h3>
     <p>{t('Elle ne s’affiche qu’une fois, et vous la recevez aussi par e-mail.','It is shown only once, and you also receive it by email.')}</p>
@@ -118,7 +118,7 @@ function Confirm({t,language}){
   </Card>;
 }
 
-const DOWNLOAD=window.location.pathname.replace(/\/?$/,'/')==='/nder/download/';
+const DOWNLOAD=window.location.pathname.replace(/\/?$/,'/')==='/n-der/download/';
 
 function App(){
   const {language,setLanguage,t}=useLanguage();
@@ -126,7 +126,7 @@ function App(){
   usePageMeta(DOWNLOAD?t('Télécharger N’Der — N’Break','Download N’Der — N’Break'):t('Bienvenue dans la bêta N’Der — N’Break','Welcome to the N’Der beta — N’Break'),DOWNLOAD?t('Le gestionnaire N’Der pour Windows, macOS et Linux.','The N’Der manager for Windows, macOS and Linux.'):t('Votre clé de licence N’Der et le gestionnaire à installer.','Your N’Der licence key and the manager to install.'));
   if(DOWNLOAD)return <NBrainProvider theme="dark" glow={.5} motion={!reduced}>
     <SimplePage t={t} language={language} setLanguage={setLanguage} eyebrow={t('N’DER · TÉLÉCHARGEMENT','N’DER · DOWNLOAD')} title={t('Le gestionnaire N’Der.','The N’Der manager.')} wide>
-      <p className="lede">{t('Il installe N’Der dans Houdini, Blender et SCRATCH, et garde la licence de la machine. Il vous faut une clé : ','It installs N’Der into Houdini, Blender and SCRATCH and keeps the machine’s licence. You need a key: ')}<a className="text-link" href="/nder/beta/">{t('recevoir une clé gratuite','get a free key')}</a>.</p>
+      <p className="lede">{t('Il installe N’Der dans Houdini, Blender et SCRATCH, et garde la licence de la machine. Il vous faut une clé : ','It installs N’Der into Houdini, Blender and SCRATCH and keeps the machine’s licence. You need a key: ')}<a className="text-link" href="/n-der/beta/">{t('recevoir une clé gratuite','get a free key')}</a>.</p>
       <Setup licence={null} t={t} language={language}/>
     </SimplePage>
   </NBrainProvider>;

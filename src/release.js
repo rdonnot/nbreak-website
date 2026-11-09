@@ -5,7 +5,7 @@
 //   stage        'soon'  — announced, the button asks for early access (contact)
 //                'beta'  — free beta open: the button goes to signupUrl
 //                'paid'  — pricing live: the button goes to signupUrl, the price line shows `price`
-//   signupUrl    where the beta button goes: the site's own form (/nder/beta/)
+//   signupUrl    where the beta button goes: the site's own form (/n-der/beta/)
 //   apiUrl       the licence server (nder-server, rdonnot/nder_application): POST /v1/signup,
 //                POST /v1/signup/confirm, GET /v1/manager. The SAME host is compiled into the manager.
 //   betaUntil    the end date of free-beta licences (must match the server's NDER_SIGNUP_UNTIL), or ''
@@ -18,7 +18,7 @@
 
 export const NDER = {
   stage: 'soon',
-  signupUrl: '/nder/beta/',
+  signupUrl: '/n-der/beta/',
   apiUrl: 'https://licence.n-break.com',
   betaUntil: '', // 'YYYY-MM-DD'
   betaDays: 90,

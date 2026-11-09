@@ -50,7 +50,7 @@ export function Masthead({t,language,setLanguage,home=false}){
     <a className="brand" href={home?'#home':'/'}>N’BREAK<span>/</span></a>
     <nav aria-label={t('Navigation principale','Main navigation')}>
       <a href={`${base}#nbrain`}>N’Brain</a>
-      <a href="/nder/">N’Der</a>
+      <a href="/n-der/">N’Der</a>
       <a href={`${base}#contact`}>Contact</a>
     </nav>
     <div className="languages">{['fr','en'].map(x=><Button key={x} size="sm" variant={language===x?'silver':'ghost'} aria-pressed={language===x} onClick={()=>setLanguage(x)}>{x.toUpperCase()}</Button>)}</div>
@@ -64,7 +64,7 @@ export function Footer({t,home=false}){
     <nav className="footer-links" aria-label={t('Informations légales','Legal information')}>
       <a href="/legal/">{t('Mentions légales','Legal notice')}</a>
       <a href="/privacy/">{t('Confidentialité','Privacy')}</a>
-      <a href="/nder/terms/">{t('Conditions N’Der','N’Der terms')}</a>
+      <a href="/n-der/terms/">{t('Conditions N’Der','N’Der terms')}</a>
     </nav>
     <span>© {new Date().getFullYear()} N’Break</span>
   </footer>;

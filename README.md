@@ -26,12 +26,12 @@ Deploy the generated `dist/` directory to a static website host.
 ## Edit the website
 
 - `src/main.jsx`: home page — company copy, the N’Brain products (N’Brain app, N’Der), contact.
-- `src/nder.jsx` + `nder/index.html`: the N’Der product page at `/nder/`.
+- `src/nder.jsx` + `nder/index.html`: the N’Der product page at `/n-der/`.
 - `src/release.js`: **N’Der availability in one place** — `stage` (`soon` → early-access button, `beta` → free-beta signup,
   `paid` → price line), `signupUrl`, and `ready`/`soon` per platform and host. `npm run build` runs
   `scripts/check-release.mjs` first and fails on an open stage without an https `signupUrl` or a paid stage without a price.
 - `src/site.jsx`: shared header, footer, language and motion helpers.
-- `public/nder/`: N’Der page images (rendered in N’Der).
+- `public/n-der/`: N’Der page images (rendered in N’Der).
 - `site.css`: layout, colours, typography and parallax.
 - `src/backgrounds/`: supplied Three.js simulations and local support helpers.
 - `vendor/nbrain-ui/`: bundled UI library source, pinned by `UPSTREAM_COMMIT`.

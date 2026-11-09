@@ -1,4 +1,4 @@
-// ─── /legal/, /privacy/, /nder/terms/ — the legal texts ─────────────────────
+// ─── /legal/, /privacy/, /n-der/terms/ — the legal texts ─────────────────────
 // One module, three pages (picked by the path). Identity fields come from COMPANY in src/release.js;
 // an empty one shows as "[à compléter]" and the build refuses to open the beta while any is empty.
 // DRAFT texts written for a French SAS/SASU publishing a free beta: have them reviewed before launch.
@@ -82,7 +82,7 @@ function Terms({t,language}){
 const PAGES={
   '/legal/':{eyebrow:['INFORMATIONS LÉGALES','LEGAL'],title:['Mentions légales.','Legal notice.'],Body:Legal},
   '/privacy/':{eyebrow:['DONNÉES PERSONNELLES','PERSONAL DATA'],title:['Confidentialité.','Privacy.'],Body:Privacy},
-  '/nder/terms/':{eyebrow:['N’DER · BÊTA','N’DER · BETA'],title:['Conditions de la bêta.','Beta terms.'],Body:Terms},
+  '/n-der/terms/':{eyebrow:['N’DER · BÊTA','N’DER · BETA'],title:['Conditions de la bêta.','Beta terms.'],Body:Terms},
 };
 
 function App(){

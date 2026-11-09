@@ -1,4 +1,4 @@
-// ─── /nder/ — the N'Der product page ─────────────────────────────────────────
+// ─── /n-der/ — the N'Der product page ─────────────────────────────────────────
 // Availability, the beta button and the price line all come from src/release.js.
 import React from 'react';
 import {createRoot} from 'react-dom/client';
@@ -53,6 +53,23 @@ function Hosts({t}){
   </section>;
 }
 
+function VirtualProduction({t}){
+  const items=[
+    [t('Temps réel à cadence fixe','Real time at a steady frame rate'),t('Le mode temps réel tient 25 images/s sur une ville de 2,3 millions d’instances : la caméra bouge, la lumière reste celle du rendu final.','Real-time mode holds 25 fps on a 2.3-million-instance city: the camera moves, the light stays final-frame light.')],
+    [t('Murs LED, dômes, VR','LED walls, domes, VR'),t('Caméras 360 latitude-longitude et dome master, pour des plaques et des arrière-plans à 360°.','360 lat-long and dome master cameras, for 360° plates and backgrounds.')],
+    [t('Sur le plateau','On set'),t('L’édition Assimilate rend la scène 3D en direct dans SCRATCH et Live FX, là où le plateau est piloté.','The Assimilate edition renders the 3D scene live inside SCRATCH and Live FX, where the stage is run.')],
+    [t('De la prévis à l’image finale','From previs to final pixels'),t('La même scène USD et le même moteur dans Houdini ou Blender, au plateau et pour les images finales.','The same USD scene and the same renderer in Houdini or Blender, on the stage and for final frames.')],
+  ];
+  return <section className="nder-section nder-vp" id="virtual-production">
+    <div className="nder-heading">
+      <span className="eyebrow">{t('PRODUCTION VIRTUELLE','VIRTUAL PRODUCTION')}</span>
+      <h2>{t('Prêt pour le plateau.','Ready for the stage.')}</h2>
+      <p>{t('N’Der a été conçu pour la production virtuelle : la qualité du ray tracing, à la cadence d’un mur LED.','N’Der was built for virtual production: ray-traced quality at the frame rate of an LED wall.')}</p>
+    </div>
+    <div className="feature-grid">{items.map(([title,body])=><div className="feature" key={title}><h3>{title}</h3><p>{body}</p></div>)}</div>
+  </section>;
+}
+
 function Features({t}){
   const features=[
     [t('Temps réel','Real time'),t('Un passage par image, DLSS Ray Reconstruction pour débruiter et monter en résolution : moins de 40 ms de GPU par image (25 images/s) sur une ville de 2,3 millions d’instances, en sortie 1080p, sur une seule RTX A5000.','One pass a frame, DLSS Ray Reconstruction to denoise and upscale: under 40 ms of GPU time a frame (25 fps) on a 2.3-million-instance city, 1080p output, on a single RTX A5000.')],
@@ -61,8 +78,8 @@ function Features({t}){
     [t('Volumes et atmosphère','Volumes and atmosphere'),t('VDB, pyro, brouillard et faisceaux, nuages, océan : la lumière diffusée dans le volume.','VDB, pyro, fog and beams, clouds, ocean: light scattered through the volume.')],
     [t('Particules','Particles'),t('Points, courbes lissées, cheveux et sprites de particules avec les attributs de Houdini, opacité et lueur additive.','Points, smoothed curves, hair and particle sprites from Houdini’s attributes, opacity and additive glow.')],
     [t('Matériaux','Materials'),t('MaterialX et matériaux USD : métal, verre, couche, sheen, subsurface, film fin, déplacement.','MaterialX and USD materials: metal, glass, coat, sheen, subsurface, thin film, displacement.')],
-    [t('Caméras 360 et dôme','360 and dome cameras'),t('Projections latitude-longitude et dome master pour les murs LED, les dômes et la VR.','Lat-long and dome master projections for LED walls, domes and VR.')],
     [t('Mouvement','Motion'),t('Flou de mouvement des caméras, objets, déformations, instances et volumes.','Motion blur for cameras, objects, deformations, instances and volumes.')],
+    [t('USD de bout en bout','USD end to end'),t('Une scène USD de Houdini ou de Blender, rendue telle quelle : instances, lumières et liens de lumière, caméras, matériaux.','A USD scene from Houdini or Blender, rendered as it is: instances, lights and light linking, cameras, materials.')],
   ];
   return <section className="nder-section" id="features">
     <div className="nder-heading">
@@ -76,7 +93,7 @@ function Features({t}){
 function Beta({t}){
   const steps=[
     [t('Recevez votre clé','Get your key'),t(`Entrez votre adresse e-mail : vous recevez une clé de licence gratuite, valable sur ${NDER.betaSeats} machines.`,`Enter your email address: you receive a free licence key, valid on ${NDER.betaSeats} machines.`)],
-    [t('Installez le gestionnaire N’Der','Install the N’Der manager'),t('Une petite application pour Windows, macOS et Linux. Elle installe les plugins dans Houdini, Blender ou SCRATCH et les tient à jour.','A small app for Windows, macOS and Linux. It installs the plugins into Houdini, Blender or SCRATCH and keeps them up to date.')],
+    [t('Installez le gestionnaire N’Der','Install the N’Der manager'),t('Une petite application pour Windows et Linux (macOS bientôt). Elle installe les plugins dans Houdini, Blender ou SCRATCH et les tient à jour.','A small app for Windows and Linux (macOS soon). It installs the plugins into Houdini, Blender or SCRATCH and keeps them up to date.')],
     [t('Une commande, puis rendez','One command, then render'),t('« nder login <clé> --setup » active la machine, installe les plugins et renouvelle la licence chaque jour. Les plugins la vérifient hors ligne et ne se connectent jamais au réseau.','“nder login <key> --setup” activates the machine, installs the plugins and renews the licence daily. The plugins check it offline and never connect to the network.')],
   ];
   return <section className="nder-section nder-beta" id="beta">
@@ -130,19 +147,19 @@ function Faq({t}){
 function App(){
   const {language,setLanguage,t}=useLanguage();
   const reduced=useReducedMotion();
-  usePageMeta(t('N’Der — Ray tracing temps réel pour Houdini, Blender et Assimilate','N’Der — Real-time ray tracing for Houdini, Blender and Assimilate'),t('N’Der, le moteur de rendu de N’Brain : un path tracer GPU temps réel pour Houdini, Blender et Assimilate SCRATCH / Live FX. Bêta gratuite.','N’Der, N’Brain’s renderer: a real-time GPU path tracer for Houdini, Blender and Assimilate SCRATCH / Live FX. Free beta.'));
+  usePageMeta(t('N’Der — Ray tracing temps réel pour Houdini, Blender et Assimilate','N’Der — Real-time ray tracing for Houdini, Blender and Assimilate'),t('N’Der, le moteur de rendu de N’Brain : ray tracing GPU temps réel pour Houdini, Blender et Assimilate SCRATCH / Live FX, prêt pour la production virtuelle. Bêta gratuite.','N’Der, N’Brain’s renderer: real-time GPU ray tracing for Houdini, Blender and Assimilate SCRATCH / Live FX, ready for virtual production. Free beta.'));
   useHeroDrift(reduced);
   return <NBrainProvider theme="dark" glow={.5} motion={!reduced}>
     <a className="skip-link" href="#main">{t('Aller au contenu','Skip to content')}</a>
     <Masthead t={t} language={language} setLanguage={setLanguage}/>
     <main id="main">
       <section className="hero nder-hero" id="home">
-        <img className="nder-hero-image" src="/nder/city.webp" alt={t('Une ville de nuit, des milliers de fenêtres éclairées, rendue dans N’Der','A city at night with thousands of lit windows, rendered in N’Der')} width="1120" height="544"/>
+        <img className="nder-hero-image" src="/n-der/city.webp" alt={t('Une ville de nuit, des milliers de fenêtres éclairées, rendue dans N’Der','A city at night with thousands of lit windows, rendered in N’Der')} width="1120" height="544"/>
         <div className="hero-shade"/>
         <div className="hero-content">
           <span className="eyebrow">{t('N’BRAIN · MOTEUR DE RENDU','N’BRAIN · RENDERER')}</span>
           <h1>N’Der<span className="dot">.</span><br/><span>{t('Le ray tracing en temps réel, dans vos outils.','Real-time ray tracing, inside your tools.')}</span></h1>
-          <p>{t('Un path tracer GPU pour Houdini, Blender et Assimilate SCRATCH / Live FX. Regardez la lumière finale pendant que vous travaillez, puis rendez vos images avec le même moteur.','A GPU path tracer for Houdini, Blender and Assimilate SCRATCH / Live FX. See the final light while you work, then render your frames with the same engine.')}</p>
+          <p>{t('Un moteur de rendu ray tracing GPU pour Houdini, Blender et Assimilate SCRATCH / Live FX, prêt pour la production virtuelle. Regardez la lumière finale pendant que vous travaillez, puis rendez vos images avec le même moteur.','A GPU ray-tracing renderer for Houdini, Blender and Assimilate SCRATCH / Live FX, ready for virtual production. See the final light while you work, then render your frames with the same engine.')}</p>
           <div className="nder-actions"><MainAction t={t}/><LinkButton href="#requirements" variant="ghost">{t('Configuration requise','Requirements')}</LinkButton></div>
         </div>
         <div className="hero-bottom">
@@ -151,6 +168,7 @@ function App(){
         </div>
       </section>
       <Hosts t={t}/>
+      <VirtualProduction t={t}/>
       <Features t={t}/>
       <Beta t={t}/>
       <Requirements t={t}/>

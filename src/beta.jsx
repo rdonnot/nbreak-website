@@ -1,6 +1,6 @@
-// ─── /nder/beta/ — the free-beta form ────────────────────────────────────────
+// ─── /n-der/beta/ — the free-beta form ────────────────────────────────────────
 // POST {apiUrl}/v1/signup {email, lang, accept_terms} → 202 {status:"sent"} for any valid email (no enumeration);
-// the server mails a link to /nder/welcome/#t=<token>. 400 bad_request, 429 rate_limited, 503 signup_closed.
+// the server mails a link to /n-der/welcome/#t=<token>. 400 bad_request, 429 rate_limited, 503 signup_closed.
 import React,{useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {NBrainProvider} from '../vendor/nbrain-ui/src/components/system/provider';
@@ -46,7 +46,7 @@ function SignupForm({t,language}){
       </label>
       <label className="check">
         <input type="checkbox" checked={accept} onChange={e=>setAccept(e.target.checked)}/>
-        <span>{t('J’accepte les ','I accept the ')}<a href="/nder/terms/">{t('conditions de la bêta N’Der','N’Der beta terms')}</a>{t(' et j’ai lu la ',' and have read the ')}<a href="/privacy/">{t('politique de confidentialité','privacy notice')}</a>.</span>
+        <span>{t('J’accepte les ','I accept the ')}<a href="/n-der/terms/">{t('conditions de la bêta N’Der','N’Der beta terms')}</a>{t(' et j’ai lu la ',' and have read the ')}<a href="/privacy/">{t('politique de confidentialité','privacy notice')}</a>.</span>
       </label>
       {state.kind==='error'&&<p className="form-error" role="alert">{state.message}</p>}
       <button className="nb-button button-md button-primary link-button" type="submit" disabled={state.kind==='sending'||!email.trim()}>{state.kind==='sending'?t('Envoi…','Sending…'):t('Recevoir ma clé de licence','Get my licence key')}</button>

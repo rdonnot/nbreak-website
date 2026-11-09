@@ -54,8 +54,8 @@ function App(){
           <Card glass className="product-card product-card-nder">
             {nderBadge(t)}
             <h3>N’Der<span className="product-kicker">{t(' — le moteur de rendu de N’Brain',' — N’Brain’s renderer')}</span></h3>
-            <p>{t('Un path tracer GPU en temps réel dans vos outils : Houdini, Blender et Assimilate SCRATCH / Live FX. La lumière d’un rendu final, à la vitesse de la lecture.','A real-time GPU path tracer inside your tools: Houdini, Blender and Assimilate SCRATCH / Live FX. Final-frame light at playback speed.')}</p>
-            <LinkButton href="/nder/" variant="primary">{t('Découvrir N’Der','Discover N’Der')}</LinkButton>
+            <p>{t('Un moteur de rendu ray tracing temps réel dans vos outils : Houdini, Blender et Assimilate SCRATCH / Live FX. Prêt pour la production virtuelle : la lumière d’un rendu final, à la vitesse de la lecture.','A real-time ray-tracing renderer inside your tools: Houdini, Blender and Assimilate SCRATCH / Live FX. Ready for virtual production: final-frame light at playback speed.')}</p>
+            <LinkButton href="/n-der/" variant="primary">{t('Découvrir N’Der','Discover N’Der')}</LinkButton>
           </Card>
         </div>
       </section>
