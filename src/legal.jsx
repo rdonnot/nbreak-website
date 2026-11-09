@@ -5,13 +5,13 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
 import {NBrainProvider} from '../vendor/nbrain-ui/src/components/system/provider';
-import {SimplePage,useLanguage,useReducedMotion,usePageMeta} from './site';
+import {PROFILE,SimplePage,useLanguage,useReducedMotion,usePageMeta} from './site';
 import {NDER,COMPANY,HOST} from './release';
 import '@fontsource-variable/inter';import '@fontsource-variable/oxanium';import '@fontsource/ibm-plex-mono/400.css';
 import '../vendor/nbrain-ui/styles.css';import '../site.css';
 
 const f=(v,t)=>v||t('[à compléter]','[to be completed]');
-const mail=(t)=>COMPANY.email?<a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>:f('',t);
+const mail=(t)=>COMPANY.email?<a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>:<a href={PROFILE} target="_blank" rel="noopener noreferrer">{t('Romain Donnot sur LinkedIn','Romain Donnot on LinkedIn')}</a>;
 const until=(t,language)=>NDER.betaUntil?new Date(NDER.betaUntil+'T00:00:00Z').toLocaleDateString(language==='fr'?'fr-FR':'en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}):t('la date indiquée dans votre licence','the date shown in your licence');
 
 function Legal({t}){

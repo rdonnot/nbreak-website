@@ -30,13 +30,13 @@ export const NDER = {
 // Fill every field before the beta opens: the build refuses an open stage with an empty one.
 export const COMPANY = {
   name: 'N’Break',
-  legalForm: '',      // e.g. 'SASU au capital de 1 000 €'
-  address: '',        // registered office
-  registration: '',   // e.g. 'RCS Paris 123 456 789'
+  legalForm: 'SAS',   // registry (recherche-entreprises.api.gouv.fr, 2026-11-09); LCEN also wants the share capital: 'SAS au capital de … €'
+  address: '2 rue Jules Michelet, 70000 Navenne, France', // registered office (siège, SIRET 832 601 413 00020)
+  registration: 'SIREN 832 601 413 — RCS Vesoul',
   vat: '',            // intra-EU VAT number, if any
   publisher: 'Romain Donnot', // directeur de la publication
-  email: '',          // contact + data-protection requests
-  courts: '',         // e.g. 'Paris' (terms: competent courts)
+  email: '',          // contact + data-protection requests (until set, the pages point to LinkedIn)
+  courts: 'Vesoul',   // terms: competent courts (the registered office's)
 };
 
 // Hosting provider (mentions légales). The website and the licence server both run there.
