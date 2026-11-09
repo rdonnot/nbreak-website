@@ -75,7 +75,7 @@ function Terms({t,language}){
     <p>{t('Voir la ','See the ')}<a href="/privacy/">{t('politique de confidentialité','privacy notice')}</a>.</p>
     <h2>{t('9. Droit applicable','9. Governing law')}</h2>
     <p>{t(`Droit français. En cas de litige, et après une tentative de solution amiable, les tribunaux de ${f(COMPANY.courts,t)} sont compétents, sauf règle impérative contraire.`,`French law. In a dispute, after an attempt to settle it amicably, the courts of ${f(COMPANY.courts,t)} have jurisdiction, unless a mandatory rule says otherwise.`)}</p>
-    <p className="form-note">{t('Contact : ','Contact: ')}{mail(t)}</p>
+    <p>{t('Contact : ','Contact: ')}{mail(t)}</p>
   </article>;
 }
 
@@ -92,7 +92,7 @@ function App(){
   const page=PAGES[path]||PAGES['/legal/'];
   usePageMeta(`${t(...page.title).replace(/\.$/,'')} — N’Break`,t(...page.title));
   return <NBrainProvider theme="dark" glow={.5} motion={!reduced}>
-    <SimplePage t={t} language={language} setLanguage={setLanguage} eyebrow={t(...page.eyebrow)} title={t(...page.title)}>
+    <SimplePage t={t} language={language} setLanguage={setLanguage} eyebrow={t(...page.eyebrow)} title={t(...page.title)} current={path.startsWith('/n-der/')?'nder':undefined}>
       <page.Body t={t} language={language}/>
     </SimplePage>
   </NBrainProvider>;

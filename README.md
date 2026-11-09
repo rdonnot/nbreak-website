@@ -34,7 +34,11 @@ Deploy the generated `dist/` directory to a static website host.
 - `public/n-der/`: N’Der page images (rendered in N’Der).
 - `site.css`: layout, colours, typography and parallax.
 - `src/backgrounds/`: supplied Three.js simulations and local support helpers.
-- `vendor/nbrain-ui/`: bundled UI library source, pinned by `UPSTREAM_COMMIT`.
+- `vendor/nbrain-ui/`: bundled UI library source (github.com/rdonnot/nbrain-ui, unchanged), pinned by `UPSTREAM_COMMIT`.
+  Every product page draws its controls with it (Button, Card, Badge, Field/Input, Checkbox, Tabs, Accordion, Alert) and
+  its `--nb-*` tokens, so N’Der looks like N’Brain; `site.css` only lays pages out. To update: copy upstream `src/`,
+  `scripts/build-styles.mjs` (as `build-styles.mjs`), `package.json` (as `upstream-package.json`), `API.md`, `LICENSE`,
+  `README.md`, `FONT-LICENSES/`, then write the new commit into `UPSTREAM_COMMIT` and `THIRD_PARTY_NOTICES.md`.
 - `scripts/library-styles.mjs`: generates library CSS before building.
 - `public/favicon.svg`: website icon.
 

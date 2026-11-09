@@ -1,12 +1,13 @@
 // ─── /n-der/beta/ — the free-beta form ────────────────────────────────────────
 // POST {apiUrl}/v1/signup {email, lang, accept_terms} → 202 {status:"sent"} for any valid email (no enumeration);
 // the server mails a link to /n-der/welcome/#t=<token>. 400 bad_request, 429 rate_limited, 503 signup_closed.
+// Controls are N'Brain UI's (Field, Input, Checkbox, Button, Alert, Card), like every N'Brain product.
 import React,{useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {NBrainProvider} from '../vendor/nbrain-ui/src/components/system/provider';
-import {Card} from '../vendor/nbrain-ui/src/components/ui/primitives';
-import {PROFILE,LinkButton,SimplePage,useLanguage,useReducedMotion,usePageMeta} from './site';
-import {NDER} from './release';
+import {Alert,Button,Card,Checkbox,Field,Input} from '../vendor/nbrain-ui/src/components/ui/primitives';
+import {LinkButton,SimplePage,useLanguage,useReducedMotion,usePageMeta} from './site';
+import {COMPANY,NDER} from './release';
 import '@fontsource-variable/inter';import '@fontsource-variable/oxanium';import '@fontsource/ibm-plex-mono/400.css';
 import '../vendor/nbrain-ui/styles.css';import '../site.css';
 
@@ -34,22 +35,19 @@ function SignupForm({t,language}){
       setState({kind:'error',message:t('Le serveur de licences ne répond pas. Vérifiez votre connexion et réessayez.','The licence server is not answering. Check your connection and try again.')});
     }
   }
-  if(state.kind==='sent')return <Card glass className="product-card form-card" role="status">
-    <h3>{t('Vérifiez votre boîte mail.','Check your inbox.')}</h3>
-    <p>{t(`Nous avons envoyé un lien à ${email.trim()}. Ouvrez-le dans les 24 heures pour recevoir votre clé de licence. Pas de message ? Regardez dans les indésirables.`,`We sent a link to ${email.trim()}. Open it within 24 hours to get your licence key. Nothing there? Look in your spam folder.`)}</p>
-  </Card>;
-  return <Card glass className="product-card form-card">
+  if(state.kind==='sent')return <Alert tone="success" title={t('Vérifiez votre boîte mail.','Check your inbox.')}>
+    {t(`Nous avons envoyé un lien à ${email.trim()}. Ouvrez-le dans les 24 heures pour recevoir votre clé de licence. Pas de message ? Regardez dans les indésirables.`,`We sent a link to ${email.trim()}. Open it within 24 hours to get your licence key. Nothing there? Look in your spam folder.`)}
+  </Alert>;
+  const acceptLabel=t('J’accepte les conditions de la bêta N’Der et j’ai lu la politique de confidentialité','I accept the N’Der beta terms and have read the privacy notice');
+  return <Card glass className="form-card">
     <form onSubmit={submit} noValidate>
-      <label className="field">
-        <span>{t('Adresse e-mail','Email address')}</span>
-        <input type="email" required autoComplete="email" inputMode="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder={t('vous@studio.com','you@studio.com')}/>
-      </label>
-      <label className="check">
-        <input type="checkbox" checked={accept} onChange={e=>setAccept(e.target.checked)}/>
-        <span>{t('J’accepte les ','I accept the ')}<a href="/n-der/terms/">{t('conditions de la bêta N’Der','N’Der beta terms')}</a>{t(' et j’ai lu la ',' and have read the ')}<a href="/privacy/">{t('politique de confidentialité','privacy notice')}</a>.</span>
-      </label>
-      {state.kind==='error'&&<p className="form-error" role="alert">{state.message}</p>}
-      <button className="nb-button button-md button-primary link-button" type="submit" disabled={state.kind==='sending'||!email.trim()}>{state.kind==='sending'?t('Envoi…','Sending…'):t('Recevoir ma clé de licence','Get my licence key')}</button>
+      <Field label={t('Adresse e-mail','Email address')}>
+        <Input type="email" required autoComplete="email" inputMode="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder={t('vous@studio.com','you@studio.com')}/>
+      </Field>
+      <Checkbox className="accept-box" checked={accept} onCheckedChange={v=>setAccept(!!v)} aria-label={acceptLabel}
+        label={<span className="accept-text">{t('J’accepte les ','I accept the ')}<a href="/n-der/terms/">{t('conditions de la bêta N’Der','N’Der beta terms')}</a>{t(' et j’ai lu la ',' and have read the ')}<a href="/privacy/">{t('politique de confidentialité','privacy notice')}</a>.</span>}/>
+      {state.kind==='error'&&<Alert tone="danger" title={state.message}/>}
+      <Button type="submit" variant="primary" loading={state.kind==='sending'} disabled={!email.trim()}>{state.kind==='sending'?t('Envoi…','Sending…'):t('Recevoir ma clé de licence','Get my licence key')}</Button>
     </form>
   </Card>;
 }
@@ -59,13 +57,13 @@ function App(){
   const reduced=useReducedMotion();
   usePageMeta(t('Bêta gratuite N’Der — N’Break','N’Der free beta — N’Break'),t('Recevez une clé de licence gratuite pour la bêta de N’Der.','Get a free licence key for the N’Der beta.'));
   return <NBrainProvider theme="dark" glow={.5} motion={!reduced}>
-    <SimplePage t={t} language={language} setLanguage={setLanguage} eyebrow={t('N’DER · BÊTA GRATUITE','N’DER · FREE BETA')} title={t('Votre clé de licence.','Your licence key.')}>
+    <SimplePage t={t} language={language} setLanguage={setLanguage} current="nder" eyebrow={t('N’DER · BÊTA GRATUITE','N’DER · FREE BETA')} title={t('Votre clé de licence.','Your licence key.')}>
       {open?<>
         <p className="lede">{t(`Entrez votre adresse e-mail : nous vous envoyons un lien, puis votre clé de licence et le gestionnaire N’Der. Gratuit pendant toute la bêta, sur ${NDER.betaSeats} machines.`,`Enter your email address: we send you a link, then your licence key and the N’Der manager. Free for the whole beta, on ${NDER.betaSeats} machines.`)}</p>
         <SignupForm t={t} language={language}/>
       </>:<>
         <p className="lede">{t('La bêta n’est pas encore ouverte. Écrivez-nous pour un accès anticipé.','The beta is not open yet. Get in touch for early access.')}</p>
-        <div className="nder-actions"><LinkButton href={PROFILE} variant="primary" external>{t('Demander un accès anticipé','Ask for early access')}</LinkButton></div>
+        <div className="nder-actions"><LinkButton href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('N’Der')}`} variant="primary">{t('Demander un accès anticipé','Ask for early access')}</LinkButton></div>
       </>}
     </SimplePage>
   </NBrainProvider>;

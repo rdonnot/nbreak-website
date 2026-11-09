@@ -3,12 +3,14 @@
 // person clicks (mail scanners that pre-open links must not consume the one-time token):
 //   POST {apiUrl}/v1/signup/confirm {token} → {licence_key, licence_id, features, kind, seats, expires_at, email, replaced?}
 //   410 token_used / token_expired, 404 not_found.
-// Then GET {apiUrl}/v1/manager → {managers:[{platform, version, sha256, size, url, latest}]} for the downloads.
+// Then GET {apiUrl}/v1/manager → {managers:[{platform, version, sha256, size, url, filename, latest}]} for the downloads
+// (the manager is `n-der`: n-der-<version>-<platform>[.exe]). Controls are N'Brain UI's (Tabs, Card, Badge, Alert, Button).
 import React,{useEffect,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {NBrainProvider} from '../vendor/nbrain-ui/src/components/system/provider';
-import {Card} from '../vendor/nbrain-ui/src/components/ui/primitives';
-import {SimplePage,useLanguage,useReducedMotion,usePageMeta} from './site';
+import {Download} from 'lucide-react';
+import {Alert,Badge,Button,Card,Tabs} from '../vendor/nbrain-ui/src/components/ui/primitives';
+import {Command,CopyButton,LinkButton,SimplePage,Steps,useLanguage,useReducedMotion,usePageMeta} from './site';
 import {NDER} from './release';
 import '@fontsource-variable/inter';import '@fontsource-variable/oxanium';import '@fontsource/ibm-plex-mono/400.css';
 import '../vendor/nbrain-ui/styles.css';import '../site.css';
@@ -28,60 +30,62 @@ function readToken(){
   return m?m[1]:'';
 }
 
-function Copy({text,t}){
-  const [done,setDone]=useState(false);
-  return <button type="button" className="nb-button button-sm button-ghost copy-button" onClick={async()=>{try{await navigator.clipboard.writeText(text);setDone(true);setTimeout(()=>setDone(false),1600)}catch{}}}>{done?t('Copié','Copied'):t('Copier','Copy')}</button>;
-}
-
 function formatSize(n){return n>1e6?`${(n/1e6).toFixed(1)} MB`:`${Math.round(n/1e3)} kB`}
+
+// The three install steps for one platform. `manager` is the server's entry for it (or undefined: not published yet).
+function PlatformSteps({platform,manager,managers,licence,t}){
+  const win=platform==='windows-x86_64';
+  // The server names the file (n-der-<version>-<platform>[.exe]); before the list arrives, a generic name.
+  const file=manager?(manager.filename||`n-der-${manager.version}-${manager.platform}${win?'.exe':''}`):(win?'n-der.exe':'n-der');
+  const key=licence?licence.licence_key:t('<votre-clé>','<your-key>');
+  const command=`${win?'.\\':'./'}${file} login ${key} --setup`;
+  const download=managers===null?<p>{t('Chargement…','Loading…')}</p>
+    :managers==='error'?<Alert tone="warning" title={t('Le serveur de téléchargement ne répond pas.','The download server is not answering.')}>{t('Rechargez la page dans un instant.','Reload the page in a moment.')}</Alert>
+    :manager?<div className="download">
+      <LinkButton href={/^https?:/.test(manager.url)?manager.url:`${NDER.apiUrl}${manager.url}`} variant="primary" download={file}>
+        <Download size={16} aria-hidden="true"/>{t(`Télécharger pour ${PLATFORM_NAMES[platform]}`,`Download for ${PLATFORM_NAMES[platform]}`)}
+      </LinkButton>
+      <span className="download-meta">{file} · {formatSize(manager.size)} · SHA-256 {manager.sha256.slice(0,12)}…</span>
+    </div>
+    :<Alert tone="blue" title={t(`Le gestionnaire pour ${PLATFORM_NAMES[platform]} arrive bientôt.`,`The manager for ${PLATFORM_NAMES[platform]} is coming soon.`)}>
+      {t('Gardez votre clé : elle fonctionnera dès sa sortie.','Keep your key: it will work as soon as it ships.')}
+    </Alert>;
+  return <Steps vertical items={[
+    [t('Téléchargez le gestionnaire N’Der','Download the N’Der manager'),download],
+    [t('Connectez cette machine','Sign this machine in'),<>
+      <p>{win?t('Ouvrez PowerShell dans le dossier du téléchargement et lancez :','Open PowerShell in the download folder and run:')
+            :t('Ouvrez un terminal dans le dossier du téléchargement et lancez :','Open a terminal in the download folder and run:')}</p>
+      {!win&&<Command text={`chmod +x ${file}`} t={t}/>}
+      <Command text={command} t={t}/>
+      <p>{t('Le gestionnaire active la licence, installe N’Der dans Houdini, Blender et SCRATCH s’ils sont présents, et la renouvelle chaque jour en arrière-plan.','The manager activates the licence, installs N’Der into Houdini, Blender and SCRATCH where they are installed, and renews it every day in the background.')}</p>
+    </>],
+    [t('Rendez','Render'),t('Houdini : choisissez « N’Der » dans le menu des moteurs de rendu du viewport Solaris. Blender : activez l’extension « N’Der » dans Préférences › Extensions, puis choisissez N’Der comme moteur de rendu. SCRATCH : le plugin N’Der apparaît au prochain démarrage.','Houdini: pick “N’Der” in the Solaris viewport’s renderer menu. Blender: enable the “N’Der” add-on in Preferences › Add-ons, then pick N’Der as the render engine. SCRATCH: the N’Der plugin appears at the next start.')],
+  ]}/>;
+}
 
 function Setup({licence,t,language}){
   const [managers,setManagers]=useState(null);
   const [platform,setPlatform]=useState(guessPlatform);
-  useEffect(()=>{fetch(`${NDER.apiUrl}/v1/manager`).then(r=>r.ok?r.json():{managers:[]}).then(d=>setManagers((d.managers||[]).filter(m=>m.latest))).catch(()=>setManagers([]))},[]);
-  const manager=managers&&managers.find(m=>m.platform===platform);
-  const file=manager?`nder-${manager.version}-${manager.platform}${manager.platform.startsWith('windows')?'.exe':''}`:'';
-  const exe=platform==='windows-x86_64'?`.\\${file||'nder.exe'}`:`./${file||'nder'}`;
-  const key=licence?licence.licence_key:t('<votre-clé>','<your-key>');
-  const command=`${exe} login ${key} --setup`;
+  useEffect(()=>{fetch(`${NDER.apiUrl}/v1/manager`).then(r=>r.ok?r.json():{managers:[]}).then(d=>setManagers((d.managers||[]).filter(m=>m.latest))).catch(()=>setManagers('error'))},[]);
   const until=licence&&licence.expires_at?new Date(licence.expires_at*1000).toLocaleDateString(language==='fr'?'fr-FR':'en-GB',{day:'numeric',month:'long',year:'numeric'}):null;
   return <>
-    {licence&&<Card glass className="product-card key-card">
+    {licence&&<Card glass className="key-card">
       <span className="eyebrow">{t('VOTRE CLÉ DE LICENCE','YOUR LICENCE KEY')}</span>
-      <div className="licence-key"><code>{licence.licence_key}</code><Copy text={licence.licence_key} t={t}/></div>
+      <div className="licence-key"><code>{licence.licence_key}</code><CopyButton text={licence.licence_key} t={t} label={t('Copier la clé','Copy the key')}/></div>
       <p>{t(`Nous l’avons aussi envoyée à ${licence.email}. Elle n’est affichée qu’une fois : gardez cet e-mail.`,`We also sent it to ${licence.email}. It is shown only once: keep that email.`)}</p>
-      <ul className="licence-facts">
-        <li>{t(`${licence.seats} machines`,`${licence.seats} machines`)}</li>
-        <li>{(licence.features||[]).map(f=>({houdini:'Houdini',blender:'Blender',scratch:'Assimilate SCRATCH / Live FX'}[f]||f)).join(' · ')}</li>
-        {until&&<li>{t(`Valable jusqu’au ${until}`,`Valid until ${until}`)}</li>}
-      </ul>
-      {licence.replaced&&<p className="form-note">{t('Cette clé remplace la précédente, qui ne fonctionne plus : connectez à nouveau vos machines avec la nouvelle.','This key replaces your previous one, which no longer works: sign your machines in again with the new key.')}</p>}
+      <div className="licence-facts">
+        <Badge tone="blue">{t(`${licence.seats} machines`,`${licence.seats} machines`)}</Badge>
+        {(licence.features||[]).map(f=><Badge key={f}>{({houdini:'Houdini',blender:'Blender',scratch:'Assimilate SCRATCH / Live FX'}[f]||f)}</Badge>)}
+        {until&&<Badge tone="success">{t(`Valable jusqu’au ${until}`,`Valid until ${until}`)}</Badge>}
+      </div>
+      {licence.replaced&&<Alert tone="warning" title={t('Cette clé remplace la précédente.','This key replaces your previous one.')}>
+        {t('L’ancienne ne fonctionne plus : connectez à nouveau vos machines avec la nouvelle.','The old one no longer works: sign your machines in again with the new key.')}
+      </Alert>}
     </Card>}
-    <section className={licence?'setup':'setup setup-first'}>
-      <h2>{t('Installer N’Der','Install N’Der')}</h2>
-      <div className="platform-tabs" role="tablist" aria-label={t('Système','System')}>{Object.entries(PLATFORM_NAMES).map(([id,name])=>
-        <button key={id} type="button" role="tab" aria-selected={platform===id} className={`nb-button button-sm ${platform===id?'button-silver':'button-ghost'}`} onClick={()=>setPlatform(id)}>{name}</button>)}</div>
-      <ol className="steps steps-vertical">
-        <li><span className="step-number">1</span><div>
-          <h3>{t('Téléchargez le gestionnaire N’Der','Download the N’Der manager')}</h3>
-          {managers===null?<p>{t('Chargement…','Loading…')}</p>
-            :manager?<p><a className="nb-button button-md button-primary link-button" href={/^https?:/.test(manager.url)?manager.url:`${NDER.apiUrl}${manager.url}`} download={file}>{t(`Télécharger pour ${PLATFORM_NAMES[platform]}`,`Download for ${PLATFORM_NAMES[platform]}`)}</a><span className="download-meta">{file} · {formatSize(manager.size)} · SHA-256 {manager.sha256.slice(0,12)}…</span></p>
-            :<p>{t(`Le gestionnaire pour ${PLATFORM_NAMES[platform]} arrive bientôt. Gardez votre clé : elle fonctionnera dès sa sortie.`,`The manager for ${PLATFORM_NAMES[platform]} is coming soon. Keep your key: it will work as soon as it ships.`)}</p>}
-        </div></li>
-        <li><span className="step-number">2</span><div>
-          <h3>{t('Connectez cette machine','Sign this machine in')}</h3>
-          <p>{platform==='windows-x86_64'
-            ?t('Ouvrez PowerShell dans le dossier du téléchargement et lancez :','Open PowerShell in the download folder and run:')
-            :t('Ouvrez un terminal dans le dossier du téléchargement et lancez :','Open a terminal in the download folder and run:')}</p>
-          {platform!=='windows-x86_64'&&<div className="command"><code>chmod +x {file||'nder'}</code><Copy text={`chmod +x ${file||'nder'}`} t={t}/></div>}
-          <div className="command"><code>{command}</code><Copy text={command} t={t}/></div>
-          <p>{t('Le gestionnaire active la licence, installe N’Der dans Houdini, Blender et SCRATCH s’ils sont présents, et la renouvelle chaque jour en arrière-plan.','The manager activates the licence, installs N’Der into Houdini, Blender and SCRATCH where they are installed, and renews it every day in the background.')}</p>
-        </div></li>
-        <li><span className="step-number">3</span><div>
-          <h3>{t('Rendez','Render')}</h3>
-          <p>{t('Houdini : choisissez « N’Der » dans le menu des moteurs de rendu du viewport Solaris. Blender : activez l’extension « N’Der » dans Préférences › Extensions, puis choisissez N’Der comme moteur de rendu. SCRATCH : le plugin N’Der apparaît au prochain démarrage.','Houdini: pick “N’Der” in the Solaris viewport’s renderer menu. Blender: enable the “N’Der” add-on in Preferences › Add-ons, then pick N’Der as the render engine. SCRATCH: the N’Der plugin appears at the next start.')}</p>
-        </div></li>
-      </ol>
+    <section className={licence?'setup':'setup setup-first'} aria-labelledby="setup-title">
+      <h2 id="setup-title">{t('Installer N’Der','Install N’Der')}</h2>
+      <Tabs value={platform} onValueChange={setPlatform} items={Object.entries(PLATFORM_NAMES).map(([id,name])=>({value:id,label:name,
+        content:<PlatformSteps platform={id} manager={Array.isArray(managers)?managers.find(m=>m.platform===id):undefined} managers={managers} licence={licence} t={t}/>}))}/>
     </section>
   </>;
 }
@@ -109,12 +113,12 @@ function Confirm({t,language}){
     }
   }
   if(state.kind==='done')return <Setup licence={state.licence} t={t} language={language}/>;
-  if(!token)return <><p className="lede">{t('Ouvrez cette page depuis le lien reçu par e-mail.','Open this page from the link in your email.')}</p><p><a className="text-link" href="/n-der/beta/">{t('Recevoir un lien','Get a link')}</a></p></>;
-  return <Card glass className="product-card form-card">
+  if(!token)return <><p className="lede">{t('Ouvrez cette page depuis le lien reçu par e-mail.','Open this page from the link in your email.')}</p><LinkButton href="/n-der/beta/" variant="secondary">{t('Recevoir un lien','Get a link')}</LinkButton></>;
+  return <Card glass className="form-card">
     <h3>{t('Votre clé est prête.','Your key is ready.')}</h3>
     <p>{t('Elle ne s’affiche qu’une fois, et vous la recevez aussi par e-mail.','It is shown only once, and you also receive it by email.')}</p>
-    {state.kind==='error'&&<p className="form-error" role="alert">{state.message}</p>}
-    <button className="nb-button button-md button-primary link-button" type="button" onClick={confirm} disabled={state.kind==='sending'}>{state.kind==='sending'?t('Un instant…','One moment…'):t('Afficher ma clé de licence','Show my licence key')}</button>
+    {state.kind==='error'&&<Alert tone="danger" title={state.message}/>}
+    <Button type="button" variant="primary" onClick={confirm} loading={state.kind==='sending'}>{state.kind==='sending'?t('Un instant…','One moment…'):t('Afficher ma clé de licence','Show my licence key')}</Button>
   </Card>;
 }
 
@@ -123,15 +127,15 @@ const DOWNLOAD=window.location.pathname.replace(/\/?$/,'/')==='/n-der/download/'
 function App(){
   const {language,setLanguage,t}=useLanguage();
   const reduced=useReducedMotion();
-  usePageMeta(DOWNLOAD?t('Télécharger N’Der — N’Break','Download N’Der — N’Break'):t('Bienvenue dans la bêta N’Der — N’Break','Welcome to the N’Der beta — N’Break'),DOWNLOAD?t('Le gestionnaire N’Der pour Windows, macOS et Linux.','The N’Der manager for Windows, macOS and Linux.'):t('Votre clé de licence N’Der et le gestionnaire à installer.','Your N’Der licence key and the manager to install.'));
+  usePageMeta(DOWNLOAD?t('Télécharger N’Der — N’Break','Download N’Der — N’Break'):t('Bienvenue dans la bêta N’Der — N’Break','Welcome to the N’Der beta — N’Break'),DOWNLOAD?t('Le gestionnaire N’Der pour Windows et Linux.','The N’Der manager for Windows and Linux.'):t('Votre clé de licence N’Der et le gestionnaire à installer.','Your N’Der licence key and the manager to install.'));
   if(DOWNLOAD)return <NBrainProvider theme="dark" glow={.5} motion={!reduced}>
-    <SimplePage t={t} language={language} setLanguage={setLanguage} eyebrow={t('N’DER · TÉLÉCHARGEMENT','N’DER · DOWNLOAD')} title={t('Le gestionnaire N’Der.','The N’Der manager.')} wide>
-      <p className="lede">{t('Il installe N’Der dans Houdini, Blender et SCRATCH, et garde la licence de la machine. Il vous faut une clé : ','It installs N’Der into Houdini, Blender and SCRATCH and keeps the machine’s licence. You need a key: ')}<a className="text-link" href="/n-der/beta/">{t('recevoir une clé gratuite','get a free key')}</a>.</p>
+    <SimplePage t={t} language={language} setLanguage={setLanguage} eyebrow={t('N’DER · TÉLÉCHARGEMENT','N’DER · DOWNLOAD')} title={t('Le gestionnaire N’Der.','The N’Der manager.')} wide current="nder">
+      <p className="lede">{t('Il installe N’Der dans Houdini, Blender et SCRATCH, et garde la licence de la machine. Il vous faut une clé : ','It installs N’Der into Houdini, Blender and SCRATCH and keeps the machine’s licence. You need a key: ')}<a href="/n-der/beta/">{t('recevoir une clé gratuite','get a free key')}</a>.</p>
       <Setup licence={null} t={t} language={language}/>
     </SimplePage>
   </NBrainProvider>;
   return <NBrainProvider theme="dark" glow={.5} motion={!reduced}>
-    <SimplePage t={t} language={language} setLanguage={setLanguage} eyebrow={t('N’DER · BÊTA GRATUITE','N’DER · FREE BETA')} title={t('Bienvenue.','Welcome.')} wide>
+    <SimplePage t={t} language={language} setLanguage={setLanguage} eyebrow={t('N’DER · BÊTA GRATUITE','N’DER · FREE BETA')} title={t('Bienvenue.','Welcome.')} wide current="nder">
       <Confirm t={t} language={language}/>
     </SimplePage>
   </NBrainProvider>;
