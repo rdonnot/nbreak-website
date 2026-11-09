@@ -1,7 +1,7 @@
 # Third-party notices
 
 N’Brain UI: https://github.com/rdonnot/nbrain-ui
-Pinned upstream commit: 74165f06502844278ac92001d689338181f80e46.
+Pinned upstream commit: 67ceddd79b417053b2844e540d08bbfeb64424ae (0.10.2).
 Component implementations are unchanged. The site composes them and uses the upstream CSS extraction script.
 
 Supplied Physarum and fluid shader ports retain MIT attribution in
