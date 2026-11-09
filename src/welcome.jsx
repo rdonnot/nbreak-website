@@ -79,7 +79,7 @@ function Setup({licence,t,language}){
         </div></li>
         <li><span className="step-number">3</span><div>
           <h3>{t('Rendez','Render')}</h3>
-          <p>{t('Houdini : choisissez « N’Der » dans le menu des moteurs de rendu du viewport Solaris. Blender : activez l’extension « Nder » dans Préférences › Extensions, puis choisissez N’Der comme moteur de rendu. SCRATCH : le plugin N’Der apparaît au prochain démarrage.','Houdini: pick “N’Der” in the Solaris viewport’s renderer menu. Blender: enable the “Nder” add-on in Preferences › Add-ons, then pick N’Der as the render engine. SCRATCH: the N’Der plugin appears at the next start.')}</p>
+          <p>{t('Houdini : choisissez « N’Der » dans le menu des moteurs de rendu du viewport Solaris. Blender : activez l’extension « N’Der » dans Préférences › Extensions, puis choisissez N’Der comme moteur de rendu. SCRATCH : le plugin N’Der apparaît au prochain démarrage.','Houdini: pick “N’Der” in the Solaris viewport’s renderer menu. Blender: enable the “N’Der” add-on in Preferences › Add-ons, then pick N’Der as the render engine. SCRATCH: the N’Der plugin appears at the next start.')}</p>
         </div></li>
       </ol>
     </section>
