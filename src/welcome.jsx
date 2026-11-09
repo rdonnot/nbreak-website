@@ -42,10 +42,11 @@ function Setup({licence,t,language}){
   const manager=managers&&managers.find(m=>m.platform===platform);
   const file=manager?`nder-${manager.version}-${manager.platform}${manager.platform.startsWith('windows')?'.exe':''}`:'';
   const exe=platform==='windows-x86_64'?`.\\${file||'nder.exe'}`:`./${file||'nder'}`;
-  const command=`${exe} login ${licence.licence_key} --setup`;
-  const until=licence.expires_at?new Date(licence.expires_at*1000).toLocaleDateString(language==='fr'?'fr-FR':'en-GB',{day:'numeric',month:'long',year:'numeric'}):null;
+  const key=licence?licence.licence_key:t('<votre-clé>','<your-key>');
+  const command=`${exe} login ${key} --setup`;
+  const until=licence&&licence.expires_at?new Date(licence.expires_at*1000).toLocaleDateString(language==='fr'?'fr-FR':'en-GB',{day:'numeric',month:'long',year:'numeric'}):null;
   return <>
-    <Card glass className="product-card key-card">
+    {licence&&<Card glass className="product-card key-card">
       <span className="eyebrow">{t('VOTRE CLÉ DE LICENCE','YOUR LICENCE KEY')}</span>
       <div className="licence-key"><code>{licence.licence_key}</code><Copy text={licence.licence_key} t={t}/></div>
       <p>{t(`Nous l’avons aussi envoyée à ${licence.email}. Elle n’est affichée qu’une fois : gardez cet e-mail.`,`We also sent it to ${licence.email}. It is shown only once: keep that email.`)}</p>
@@ -55,8 +56,8 @@ function Setup({licence,t,language}){
         {until&&<li>{t(`Valable jusqu’au ${until}`,`Valid until ${until}`)}</li>}
       </ul>
       {licence.replaced&&<p className="form-note">{t('Cette clé remplace la précédente, qui ne fonctionne plus : connectez à nouveau vos machines avec la nouvelle.','This key replaces your previous one, which no longer works: sign your machines in again with the new key.')}</p>}
-    </Card>
-    <section className="setup">
+    </Card>}
+    <section className={licence?'setup':'setup setup-first'}>
       <h2>{t('Installer N’Der','Install N’Der')}</h2>
       <div className="platform-tabs" role="tablist" aria-label={t('Système','System')}>{Object.entries(PLATFORM_NAMES).map(([id,name])=>
         <button key={id} type="button" role="tab" aria-selected={platform===id} className={`nb-button button-sm ${platform===id?'button-silver':'button-ghost'}`} onClick={()=>setPlatform(id)}>{name}</button>)}</div>
@@ -117,10 +118,18 @@ function Confirm({t,language}){
   </Card>;
 }
 
+const DOWNLOAD=window.location.pathname.replace(/\/?$/,'/')==='/nder/download/';
+
 function App(){
   const {language,setLanguage,t}=useLanguage();
   const reduced=useReducedMotion();
-  usePageMeta(t('Bienvenue dans la bêta N’Der — N’Break','Welcome to the N’Der beta — N’Break'),t('Votre clé de licence N’Der et le gestionnaire à installer.','Your N’Der licence key and the manager to install.'));
+  usePageMeta(DOWNLOAD?t('Télécharger N’Der — N’Break','Download N’Der — N’Break'):t('Bienvenue dans la bêta N’Der — N’Break','Welcome to the N’Der beta — N’Break'),DOWNLOAD?t('Le gestionnaire N’Der pour Windows, macOS et Linux.','The N’Der manager for Windows, macOS and Linux.'):t('Votre clé de licence N’Der et le gestionnaire à installer.','Your N’Der licence key and the manager to install.'));
+  if(DOWNLOAD)return <NBrainProvider theme="dark" glow={.5} motion={!reduced}>
+    <SimplePage t={t} language={language} setLanguage={setLanguage} eyebrow={t('N’DER · TÉLÉCHARGEMENT','N’DER · DOWNLOAD')} title={t('Le gestionnaire N’Der.','The N’Der manager.')} wide>
+      <p className="lede">{t('Il installe N’Der dans Houdini, Blender et SCRATCH, et garde la licence de la machine. Il vous faut une clé : ','It installs N’Der into Houdini, Blender and SCRATCH and keeps the machine’s licence. You need a key: ')}<a className="text-link" href="/nder/beta/">{t('recevoir une clé gratuite','get a free key')}</a>.</p>
+      <Setup licence={null} t={t} language={language}/>
+    </SimplePage>
+  </NBrainProvider>;
   return <NBrainProvider theme="dark" glow={.5} motion={!reduced}>
     <SimplePage t={t} language={language} setLanguage={setLanguage} eyebrow={t('N’DER · BÊTA GRATUITE','N’DER · FREE BETA')} title={t('Bienvenue.','Welcome.')} wide>
       <Confirm t={t} language={language}/>
