@@ -25,6 +25,20 @@ export function useHeroDrift(reduced){
   useEffect(()=>{if(reduced)return;let frame=0;const update=()=>{frame=0;document.documentElement.style.setProperty('--hero-drift',`${Math.min(window.scrollY*.12,65)}px`)};const scroll=()=>{if(!frame)frame=requestAnimationFrame(update)};window.addEventListener('scroll',scroll,{passive:true});update();return()=>{window.removeEventListener('scroll',scroll);cancelAnimationFrame(frame);document.documentElement.style.setProperty('--hero-drift','0px')}},[reduced]);
 }
 
+// The page shell every secondary page shares (beta form, welcome, legal texts).
+export function SimplePage({t,language,setLanguage,eyebrow,title,children,wide=false}){
+  return <>
+    <a className="skip-link" href="#main">{t('Aller au contenu','Skip to content')}</a>
+    <Masthead t={t} language={language} setLanguage={setLanguage}/>
+    <main id="main" className={`simple-page${wide?' simple-page-wide':''}`}>
+      <span className="eyebrow">{eyebrow}</span>
+      <h1>{title}</h1>
+      {children}
+    </main>
+    <Footer t={t}/>
+  </>;
+}
+
 export function LinkButton({href,children,variant='silver',external=false}){
   return <a className={`nb-button button-md button-${variant} link-button`} href={href} {...(external?{target:'_blank',rel:'noopener noreferrer'}:{})}>{children}</a>;
 }
@@ -47,6 +61,11 @@ export function Footer({t,home=false}){
   return <footer>
     <a className="brand" href={home?'#home':'/'}>N’BREAK<span>/</span></a>
     <span>{t('Technologies créatives','Creative technology')}</span>
+    <nav className="footer-links" aria-label={t('Informations légales','Legal information')}>
+      <a href="/legal/">{t('Mentions légales','Legal notice')}</a>
+      <a href="/privacy/">{t('Confidentialité','Privacy')}</a>
+      <a href="/nder/terms/">{t('Conditions N’Der','N’Der terms')}</a>
+    </nav>
     <span>© {new Date().getFullYear()} N’Break</span>
   </footer>;
 }

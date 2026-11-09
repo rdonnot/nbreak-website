@@ -75,9 +75,9 @@ function Features({t}){
 
 function Beta({t}){
   const steps=[
-    [t('Créez votre compte','Create your account'),t('Un compte N’Brain gratuit, avec votre adresse e-mail.','A free N’Brain account, with your email address.')],
+    [t('Recevez votre clé','Get your key'),t(`Entrez votre adresse e-mail : vous recevez une clé de licence gratuite, valable sur ${NDER.betaSeats} machines.`,`Enter your email address: you receive a free licence key, valid on ${NDER.betaSeats} machines.`)],
     [t('Installez le gestionnaire N’Der','Install the N’Der manager'),t('Une petite application pour Windows, macOS et Linux. Elle installe les plugins dans Houdini, Blender ou SCRATCH et les tient à jour.','A small app for Windows, macOS and Linux. It installs the plugins into Houdini, Blender or SCRATCH and keeps them up to date.')],
-    [t('Connectez-vous et rendez','Sign in and render'),t('Le gestionnaire garde la licence de la machine. Les plugins la vérifient hors ligne et ne se connectent jamais au réseau.','The manager keeps the machine’s licence. The plugins check it offline and never connect to the network.')],
+    [t('Une commande, puis rendez','One command, then render'),t('« nder login <clé> --setup » active la machine, installe les plugins et renouvelle la licence chaque jour. Les plugins la vérifient hors ligne et ne se connectent jamais au réseau.','“nder login <key> --setup” activates the machine, installs the plugins and renews the licence daily. The plugins check it offline and never connect to the network.')],
   ];
   return <section className="nder-section nder-beta" id="beta">
     <div className="nder-heading">
@@ -116,7 +116,7 @@ function Faq({t}){
     [t('Et une ferme de rendu ?','What about a render farm?'),t('Les nœuds de rendu ont leur propre licence, pour les rendus en ligne de commande (husk, blender -b).','Render nodes get their own licence, for command-line renders (husk, blender -b).')],
     [t('Que se passe-t-il sans licence ?','What happens without a licence?'),t('Le rendu fonctionne, avec des bandes grises en diagonale sur l’image.','Rendering still works, with diagonal grey bands across the picture.')],
     [t('Le code source est-il disponible ?','Is the source code available?'),t('Non. N’Der est distribué uniquement en version compilée.','No. N’Der ships as compiled builds only.')],
-    [t('Quelles données sont collectées ?','What data is collected?'),t('Votre adresse e-mail pour le compte, et une empreinte anonyme de chaque machine (un hachage, pas son identifiant) pour lier la licence à la machine.','Your email address for the account, and an anonymous fingerprint of each machine (a hash, not its identifier) to tie the licence to the machine.')],
+    [t('Quelles données sont collectées ?','What data is collected?'),t('Votre adresse e-mail pour la licence, et pour chaque machine activée une empreinte anonyme (un hachage, pas son identifiant) et son nom. Détails dans la politique de confidentialité.','Your email address for the licence, and for each activated machine an anonymous fingerprint (a hash, not its identifier) and its name. Details in the privacy notice.')],
   ];
   return <section className="nder-section" id="faq">
     <div className="nder-heading">
