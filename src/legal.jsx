@@ -12,7 +12,7 @@ import '../vendor/nbrain-ui/styles.css';import '../site.css';
 
 const f=(v,t)=>v||t('[à compléter]','[to be completed]');
 const mail=(t)=>COMPANY.email?<a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>:<a href={PROFILE} target="_blank" rel="noopener noreferrer">{t('Romain Donnot sur LinkedIn','Romain Donnot on LinkedIn')}</a>;
-const until=(t,language)=>NDER.betaUntil?new Date(NDER.betaUntil+'T00:00:00Z').toLocaleDateString(language==='fr'?'fr-FR':'en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}):t('la date indiquée dans votre licence','the date shown in your licence');
+const until=(t,language)=>NDER.betaUntil?new Date(NDER.betaUntil+'T00:00:00Z').toLocaleDateString(language==='fr'?'fr-FR':'en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}):(NDER.betaDays?t(`${NDER.betaDays} jours après votre inscription (la date figure dans votre licence)`,`${NDER.betaDays} days after you sign up (the date is shown in your licence)`):t('la date indiquée dans votre licence','the date shown in your licence'));
 
 function Legal({t}){
   return <article className="legal-text">

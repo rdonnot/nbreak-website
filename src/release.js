@@ -8,7 +8,9 @@
 //   signupUrl    where the beta button goes: the site's own form (/nder/beta/)
 //   apiUrl       the licence server (nder-server, rdonnot/nder_application): POST /v1/signup,
 //                POST /v1/signup/confirm, GET /v1/manager. The SAME host is compiled into the manager.
-//   betaUntil    the end date of free-beta licences (must match the server's NDER_SIGNUP_UNTIL)
+//   betaUntil    the end date of free-beta licences (must match the server's NDER_SIGNUP_UNTIL), or ''
+//   betaDays     … else each licence lasts this many days from sign-up (the server's NDER_SIGNUP_DAYS)
+//   hostVersions the exact host builds the published plugins load in (a Houdini build loads only in its own version)
 //   platforms    status per OS: 'ready' | 'soon'
 //   hosts        status per host application: 'ready' | 'soon'
 //
@@ -19,10 +21,12 @@ export const NDER = {
   signupUrl: '/nder/beta/',
   apiUrl: 'https://licence.n-break.com',
   betaUntil: '', // 'YYYY-MM-DD'
+  betaDays: 90,
+  hostVersions: {houdini: {windows: '22.0.429', linux: '22.0.466'}, blender: '5.2', assimilate: 'SCRATCH 12.1'},
   betaSeats: 2,   // machines per free-beta licence (must match the server's NDER_SIGNUP_SEATS)
   price: null, // e.g. {fr: '29 € / mois', en: '€29 / month'} once stage is 'paid'
-  platforms: {windows: 'soon', linux: 'soon', macos: 'soon'},
-  hosts: {houdini: 'soon', blender: 'soon', assimilate: 'soon'},
+  platforms: {windows: 'ready', linux: 'ready', macos: 'soon'},
+  hosts: {houdini: 'ready', blender: 'ready', assimilate: 'ready'},
 };
 
 // ─── Publisher identity (mentions légales, terms, privacy) ─────────────────
@@ -35,7 +39,7 @@ export const COMPANY = {
   registration: 'SIREN 832 601 413 — RCS Vesoul',
   vat: '',            // intra-EU VAT number, if any
   publisher: 'Romain Donnot', // directeur de la publication
-  email: '',          // contact + data-protection requests (until set, the pages point to LinkedIn)
+  email: 'nder@n-break.com', // contact + data-protection requests
   courts: 'Vesoul',   // terms: competent courts (the registered office's)
 };
 

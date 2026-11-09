@@ -9,7 +9,7 @@ for(const [group,values] of Object.entries({platforms:NDER.platforms,hosts:NDER.
 if(NDER.stage!=='soon'){
   if(!/^(https:\/\/|\/)/.test(NDER.signupUrl))errors.push(`stage "${NDER.stage}" needs a signupUrl (https or a site path)`);
   if(!/^https:\/\/[^/]+$/.test(NDER.apiUrl))errors.push(`stage "${NDER.stage}" needs apiUrl = https://host (no trailing slash)`);
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(NDER.betaUntil))errors.push(`stage "${NDER.stage}" needs betaUntil YYYY-MM-DD`);
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(NDER.betaUntil)&&!(NDER.betaDays>0))errors.push(`stage "${NDER.stage}" needs betaUntil YYYY-MM-DD or betaDays`);
   for(const k of ['legalForm','address','registration','email','courts'])if(!COMPANY[k])errors.push(`COMPANY.${k} is empty (mentions légales / terms / privacy)`);
   if(!Object.values(NDER.platforms).includes('ready'))errors.push('an open stage needs at least one platform "ready"');
   if(!Object.values(NDER.hosts).includes('ready'))errors.push('an open stage needs at least one host "ready"');

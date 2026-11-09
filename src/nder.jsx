@@ -96,9 +96,9 @@ function Requirements({t}){
     ['Windows',t('Windows 10 ou 11, 64 bits','Windows 10 or 11, 64-bit'),NDER.platforms.windows],
     ['Linux',t('64 bits, testé sur Ubuntu 24.04','64-bit, tested on Ubuntu 24.04'),NDER.platforms.linux],
     ['macOS',t('Apple silicon avec ray tracing matériel (M3 ou plus récent)','Apple silicon with hardware ray tracing (M3 or later)'),NDER.platforms.macos],
-    ['Houdini','22.0 (Solaris, husk)',NDER.hosts.houdini],
-    ['Blender','5.2',NDER.hosts.blender],
-    ['Assimilate',t('SCRATCH et Live FX, Windows','SCRATCH and Live FX, Windows'),NDER.hosts.assimilate],
+    ['Houdini',t(`${NDER.hostVersions.houdini.windows} (Windows), ${NDER.hostVersions.houdini.linux} (Linux) — Solaris, husk`,`${NDER.hostVersions.houdini.windows} (Windows), ${NDER.hostVersions.houdini.linux} (Linux) — Solaris, husk`),NDER.hosts.houdini],
+    ['Blender',NDER.hostVersions.blender,NDER.hosts.blender],
+    ['Assimilate',t(`${NDER.hostVersions.assimilate} et Live FX, Windows`,`${NDER.hostVersions.assimilate} and Live FX, Windows`),NDER.hosts.assimilate],
   ];
   return <section className="nder-section" id="requirements">
     <div className="nder-heading">
@@ -146,7 +146,7 @@ function App(){
           <div className="nder-actions"><MainAction t={t}/><LinkButton href="#requirements" variant="ghost">{t('Configuration requise','Requirements')}</LinkButton></div>
         </div>
         <div className="hero-bottom">
-          <span>{open?t('Bêta gratuite','Free beta'):t('Bêta gratuite bientôt','Free beta coming soon')} · Windows · Linux · macOS</span>
+          <span>{open?t('Bêta gratuite','Free beta'):t('Bêta gratuite bientôt','Free beta coming soon')} · {Object.entries({windows:'Windows',linux:'Linux',macos:'macOS'}).map(([k,n])=>NDER.platforms[k]==='ready'?n:t(`${n} bientôt`,`${n} soon`)).join(' · ')}</span>
           <span>{t('Image rendue dans N’Der','Rendered in N’Der')}</span>
         </div>
       </section>
